@@ -2,7 +2,7 @@
 
 import React from 'react';
 import './CollectionSection.css';
-import PixelCard from './Pixelcard';
+import PixelCard from './PixelCard';
 
 const collections = [
   {

@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  }
+  
+  body {
+    background-color: #fff;
+    color: #222;
+    line-height: 1.43;
+  }
+  
+  .app-container {
+    max-width: 1278px;
+    margin: 0 auto;
+    padding: 24px 40px;
+  }
+  
+  .listing-container {
+    width: 100%;
+  }
+  
+  .listing-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+    gap: 48px;
+  }
+  
+  .listing-details {
+    flex: 2;
+  }
+  
+  .booking-section {
+    flex: 1;
+  }
+  
+  .map-section {
+    margin-top: 48px;
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f9f9f9; /* Optional: Add a background color */
+  }
+  
+  @media (min-width: 744px) {
+    .listing-content {
+      flex-direction: row;
+    }
+  }
+  
+  @media (max-width: 743px) {
+    .app-container {
+      padding: 16px;
+    }
+  }

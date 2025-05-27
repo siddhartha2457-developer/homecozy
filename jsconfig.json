@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".", // Required for the paths alias to work
     "paths": {
       "@/*": ["./src/*"]
     }

@@ -1,0 +1,51 @@
+.luxury-section {
+    padding: 40px 20px;
+    background-color: #f5f8fa;
+    text-align: center;
+  }
+  
+  .luxury-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  .luxury-cards {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .luxury-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .luxury-card:hover {
+    transform: translateY(-8px);
+  }
+  
+  .lottie-wrapper {
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .card-desc {
+    font-size: 14px;
+    color: #555;
+  }
+  

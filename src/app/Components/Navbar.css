@@ -1,0 +1,65 @@
+/* Add this CSS to HeroSearch.css */
+.navbar {
+    background-color: #07192f;
+    padding: 10px 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .Link-style {
+    text-decoration: none;
+  color: inherit;
+  display: block;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .property-link {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 8px;
+  }
+  
+  .nav-btn {
+    background-color: white;
+    color: #cd592f;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .nav-btn:hover {
+    background-color: #e6e6e6;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .navbar-right {
+      margin-top: 10px;
+    }
+  }
+  

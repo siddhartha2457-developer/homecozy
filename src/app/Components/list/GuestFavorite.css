@@ -1,0 +1,66 @@
+.guest-favorite {
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.favorite-badge {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.trophy-icon {
+  color: #FFB400;
+}
+
+.favorite-text h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.favorite-text p {
+  font-size: 14px;
+  color: #717171;
+}
+
+.rating-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #DDDDDD;
+  padding-top: 24px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rating-value {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.stars {
+  display: flex;
+  color: #222222;
+}
+
+.reviews-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviews-count span:first-child {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.reviews-count span:last-child {
+  font-size: 14px;
+}

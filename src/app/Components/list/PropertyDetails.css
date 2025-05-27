@@ -1,0 +1,27 @@
+.property-details {
+  margin-bottom: 24px;
+}
+
+.property-details h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.property-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 16px;
+  color: #222222;
+}
+
+.dot-separator {
+  margin: 0 4px;
+}
+
+@media (max-width: 743px) {
+  .property-specs {
+    font-size: 14px;
+  }
+}

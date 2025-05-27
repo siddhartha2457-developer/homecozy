@@ -1,0 +1,30 @@
+.property-highlights {
+  margin-bottom: 24px;
+}
+
+.highlight-item {
+  display: flex;
+  gap: 16px;
+  padding: 24px 0;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.highlight-item:last-child {
+  border-bottom: none;
+}
+
+.highlight-icon {
+  color: #222222;
+}
+
+.highlight-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.highlight-content p {
+  font-size: 14px;
+  color: #717171;
+  line-height: 1.5;
+}

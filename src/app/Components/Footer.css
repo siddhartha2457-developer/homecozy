@@ -1,0 +1,90 @@
+.footer-section{
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer {
+    position: relative;
+    color: white;
+    padding: 40px 60px 40px 60px;
+    font-family: sans-serif;
+    overflow: hidden;
+    background-color: #07192f;
+  }
+  
+  .footer-top {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .footer-tagline {
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  .footer-divider {
+    border-color: #444;
+    margin-bottom: 30px;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+  
+  .footer-column h4 {
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column li {
+    margin-bottom: 8px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-column li:hover {
+    color: orange;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .social-icons svg {
+    margin-right: 15px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .social-icons svg:hover {
+    color: orange;
+  }
+
+  .aurora-container {
+    width: 100%;
+    height: 100%;
+    
+  }
+  

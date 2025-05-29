@@ -277,14 +277,18 @@ export default function ListingPage({ params }) {
             saved={saved}
           />
           <PhotoGallery
-            media={
-              listing.fullproperty[0]?.mediaInput.map((img) => ({
-                ...img,
-                url: `https://host.cozyhomestays.com/${img.path.replace(/\\/g, "/")}`,
-              })) || []
-            }
-            onMediaClick={openImageModal}
-          />
+                media={
+                  listing.fullproperty[0]?.mediaInput.map((img) => {
+                    console.log("Mapping media item:", img); // Debugging step
+                    return {
+                      ...img,
+                      url: `https://host.cozyhomestays.com/${img.path.replace(/\\/g, "/")}`,
+                      mimetype: img.mimetype, // Ensure mimetype is passed
+                    };
+                  }) || []
+                }
+                onMediaClick={openImageModal}
+              />
 
           <div className="listing-content">
             <div className="listing-details">

@@ -1,19 +1,50 @@
-'use client';
-import { useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight } from './Icons';
-import './ImageModal.css';
+"use client"
 
-function ImageModal({ images, selectedIndex, onClose, onNext, onPrev, setSelectedIndex }) {
+import { useEffect, useState } from "react"
+import { X, ChevronLeft, ChevronRight } from "./Icons"
+import "./ImageModal.css"
+
+function ImageModal({ images, selectedIndex: initialIndex = 0, onClose, onNext, onPrev }) {
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex)
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowRight') onNext();
-      if (e.key === 'ArrowLeft') onPrev();
-    };
+      if (e.key === "Escape") onClose()
+      if (e.key === "ArrowRight") handleNext()
+      if (e.key === "ArrowLeft") handlePrev()
+    }
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose, onNext, onPrev]);
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [onClose])
+
+  useEffect(() => {
+    setSelectedIndex(initialIndex)
+  }, [initialIndex])
+
+  const handleNext = () => {
+    setIsLoading(true)
+    setSelectedIndex((prevIndex) => (prevIndex + 1) % images.length)
+    if (onNext) onNext()
+  }
+
+  const handlePrev = () => {
+    setIsLoading(true)
+    setSelectedIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+    if (onPrev) onPrev()
+  }
+
+  const handleImageLoad = () => {
+    setIsLoading(false)
+  }
+
+  const handleVideoLoad = () => {
+    setIsLoading(false)
+  }
+
+  const currentMedia = images[selectedIndex] || {}
+  const isVideo = currentMedia.mimetype === "video"
 
   return (
     <div className="image-modal-overlay">
@@ -25,69 +56,61 @@ function ImageModal({ images, selectedIndex, onClose, onNext, onPrev, setSelecte
           {selectedIndex + 1} / {images.length}
         </div>
       </div>
-      
+
       <div className="image-modal-content">
-        <button className="nav-button prev" onClick={onPrev}>
+        <button className="nav-button prev" onClick={handlePrev}>
           <ChevronLeft />
         </button>
-        
+
         <div className="modal-image-container">
-  {images[selectedIndex].type === 'image' ? (
-    <img 
-      src={images[selectedIndex].url || "/placeholder.svg"} 
-      alt={images[selectedIndex].alt} 
-      className="modal-image"
-    />
-  ) : (
+          {isLoading && <div className="modal-loading">Loading...</div>}
 
+          {isVideo ? (
+            <video controls className="modal-video" onLoadedData={handleVideoLoad} autoPlay playsInline>
+              <source src={currentMedia.url} type="video/mp4" />
+              <source src={currentMedia.url} type="video/webm" />
+              <source src={currentMedia.url} type="video/ogg" />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <img
+              src={currentMedia.url || "/placeholder.svg?height=600&width=800"}
+              alt={`Media ${selectedIndex + 1}`}
+              className="modal-image"
+              onLoad={handleImageLoad}
+              style={{ opacity: isLoading ? 0 : 1 }}
+            />
+          )}
+        </div>
 
-    <img 
-      src={images[selectedIndex].url || "/placeholder.svg"} 
-      alt={images[selectedIndex].alt} 
-      className="modal-image"
-    />
-    // <video controls className="modal-image">
-    //   <source src={images[selectedIndex].url} type="video/mp4" />
-    //   Your browser does not support the video tag.
-    // </video>
-  )}
-</div>
-        <button className="nav-button next" onClick={onNext}>
+        <button className="nav-button next" onClick={handleNext}>
           <ChevronRight />
         </button>
       </div>
-      
+
       <div className="image-modal-thumbnails">
-        {images.map((image, index) => (
-          <div 
-            key={image.id} 
-            className={`thumbnail ${selectedIndex === index ? 'active' : ''}`}
+        {images.map((media, index) => (
+          <div
+            key={media._id || index}
+            className={`thumbnail ${selectedIndex === index ? "active" : ""}`}
             onClick={() => {
-              setSelectedIndex(index); // ✅ update index here
-              const imageElement = document.querySelector('.modal-image');
-              if (imageElement) {
-                imageElement.classList.add('fade');
-                setTimeout(() => {
-                  imageElement.classList.remove('fade');
-                }, 300);
-              }
+              setSelectedIndex(index)
+              setIsLoading(true)
             }}
           >
-           {image.type === 'image' ? (
-  <img src={image.url || "/placeholder.svg"} alt={`Thumbnail ${index + 1}`} />
-) : (
-
-  <img src={image.url || "/placeholder.svg"} alt={`Thumbnail ${index + 1}`} />
-  // <video className="thumbnail-video">
-  //   <source src={image.url} type="video/mp4" />
-  // </video>
-)}
+            {media.mimetype === "video" ? (
+              <div className="video-thumbnail">
+                <img src={media.url || "/placeholder.svg?height=100&width=100"} alt={`Thumbnail ${index + 1}`} />
+                <div className="video-icon">▶</div>
+              </div>
+            ) : (
+              <img src={media.url || "/placeholder.svg?height=100&width=100"} alt={`Thumbnail ${index + 1}`} />
+            )}
           </div>
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-
-export default ImageModal;
+export default ImageModal

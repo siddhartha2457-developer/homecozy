@@ -9,6 +9,7 @@ import axios from "axios"
 import "./hero-section.css"
 import CalendarDropdown from "./CalendarDropdown";
 import "./CalendarDropdown";
+import CalendarPicker from "./list/CalendarPicker";
 
 export default function HeroSection() {
   const router = useRouter()
@@ -493,9 +494,9 @@ export default function HeroSection() {
 
         {/* <button className="menu-toggle-hero-no1" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button> */}
+        </button>
 
-        {/* <div className={`nav-links-hero-no1 ${isMenuOpen ? "nav-open" : ""}`}>
+        <div className={`nav-links-hero-no1 ${isMenuOpen ? "nav-open" : ""}`}>
           <Link href="/list-property">List your property</Link>
           <Link href="/register" className="btn-register-hero-no1">
             Register

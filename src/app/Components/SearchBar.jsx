@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { Search, MapPin, Calendar, Users, ChevronDown } from "./list/Icons"
 import "./SearchBar.css"
 import axios from "axios"
+import CalendarPicker from "./list/CalendarPicker";
 
 const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
   // Initialize with only the initialLocation prop, not URL parameters
@@ -24,6 +25,7 @@ const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
 
   const datePickerRef = useRef(null)
   const guestPickerRef = useRef(null)
+  const suggestionsRef = useRef(null); // Ref for the suggestions dropdown
 
   // Only auto-trigger search if explicitly requested and location is provided
   useEffect(() => {
@@ -116,6 +118,10 @@ const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
       if (guestPickerRef.current && !guestPickerRef.current.contains(event.target)) {
         setIsGuestPickerOpen(false)
       }
+      // Close suggestions dropdown if clicked outside
+      if (suggestionsRef.current && !suggestionsRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside)
@@ -150,14 +156,15 @@ const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
 
     try {
       console.log("SearchBar: Fetching location suggestions for query:", query);
-      
+    
       const response = await axios.get(
         `https://photon.komoot.io/api/?q=${encodeURIComponent(query + " India")}&limit=40`
       );
-      
+    
       console.log("SearchBar: Location suggestions API response:", response.data);
     
       const seen = new Set(); // to track unique locations
+      const isEnglish = (text) => /^[\x00-\x7F]*$/.test(text); // ASCII only
     
       const suggestions = response.data.features.map((feature) => {
         const { name, city, state, country } = feature.properties;
@@ -169,6 +176,12 @@ const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
           country: country || ''
         };
       }).filter((location) => {
+        // Check if all parts of location contain only English characters
+        const allEnglish = [location.name, location.city, location.state, location.country]
+          .every(part => isEnglish(part));
+    
+        if (!allEnglish) return false;
+    
         // Create a unique key from location parts
         const key = [location.name, location.city, location.state, location.country].join('|').toLowerCase();
     
@@ -176,6 +189,7 @@ const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
         seen.add(key);
         return true;
       });
+    
     
       setResults(suggestions);
       setShowSuggestions(true);
@@ -219,7 +233,7 @@ const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
             placeholder="Search by location"
           />
           {showSuggestions && results.length > 0 && (
-            <ul className="suggestions-dropdown">
+            <ul className="suggestions-dropdown" ref={suggestionsRef}>
               {results.map((suggestion, index) => (
                 <li
                   key={index}
@@ -251,59 +265,21 @@ const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
           </button>
 
           {isDatePickerOpen && (
-            <div className="date-picker-dropdown">
-              <div className="calendar-header">
-                <button type="button" className="calendar-nav" onClick={prevMonth}>
-                  &lt;
-                </button>
-                <h3>{getMonthName(calendarMonth)}</h3>
-                <button type="button" className="calendar-nav" onClick={nextMonth}>
-                  &gt;
-                </button>
-              </div>
-              <div className="calendar-weekdays">
-                <div>Su</div>
-                <div>Mo</div>
-                <div>Tu</div>
-                <div>We</div>
-                <div>Th</div>
-                <div>Fr</div>
-                <div>Sa</div>
-              </div>
-              <div className="calendar-days">
-                {generateCalendarDays(calendarMonth.getFullYear(), calendarMonth.getMonth()).map((day, index) => (
-                  <div
-                    key={index}
-                    className={`calendar-day ${!day.day ? "empty" : ""} ${
-                      day.date && checkInDate && day.date.toISOString().split("T")[0] === checkInDate ? "check-in" : ""
-                    } ${
-                      day.date && checkOutDate && day.date.toISOString().split("T")[0] === checkOutDate
-                        ? "check-out"
-                        : ""
-                    } ${day.date && isInRange(day.date) ? "in-range" : ""} ${
-                      day.date && isPastDate(day.date) ? "past" : ""
-                    }`}
-                    onClick={() => day.day && !isPastDate(day.date) && handleDateSelect(day.date)}
-                  >
-                    {day.day}
-                  </div>
-                ))}
-              </div>
-              <div className="calendar-footer">
-                <button
-                  type="button"
-                  className="clear-dates"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setCheckInDate(null)
-                    setCheckOutDate(null)
-                    setSelectingCheckIn(true)
-                  }}
-                >
-                  Clear dates
-                </button>
-              </div>
-            </div>
+            <CalendarPicker
+              checkInDate={checkInDate}
+              checkOutDate={checkOutDate}
+              onDateSelect={handleDateSelect}
+              onClearDates={(e) => {
+                e.stopPropagation();
+                setCheckInDate(null);
+                setCheckOutDate(null);
+                setSelectingCheckIn(true);
+              }}
+              calendarMonth={calendarMonth}
+              setCalendarMonth={setCalendarMonth}
+              selectingCheckIn={selectingCheckIn}
+              setSelectingCheckIn={setSelectingCheckIn}
+            />
           )}
         </div>
 

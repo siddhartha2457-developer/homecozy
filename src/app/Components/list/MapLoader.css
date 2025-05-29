@@ -1,4 +1,4 @@
-.map-loading {
+.map-loading1 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +9,7 @@
   gap: 1rem;
 }
 
-.loading-spinner {
+.loading-spinner1 {
   width: 2rem;
   height: 2rem;
   border: 3px solid rgba(0, 113, 194, 0.1);
@@ -24,7 +24,7 @@
   }
 }
 
-.map-loading p {
+.map-loading1 p {
   color: #64748b;
   font-size: 0.875rem;
   margin: 0;

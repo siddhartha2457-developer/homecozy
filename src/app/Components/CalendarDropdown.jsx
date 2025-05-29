@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import "./CalendarDropdown.css"
+import { useState } from "react";
+import "./CalendarDropdown.css";
 
 const CalendarDropdown = ({
   checkInDate,
@@ -12,123 +12,88 @@ const CalendarDropdown = ({
   setSelectingCheckIn,
   onClose,
 }) => {
-  const [calendarMonth, setCalendarMonth] = useState(new Date())
-
-  // Generate calendar days
-  const generateCalendarDays = (year, month) => {
-    const firstDay = new Date(year, month, 1)
-    const lastDay = new Date(year, month + 1, 0)
-    const daysInMonth = lastDay.getDate()
-    const startingDayOfWeek = firstDay.getDay()
-
-    const days = []
-
-    for (let i = 0; i < startingDayOfWeek; i++) {
-      days.push({ day: null, date: null })
-    }
-
-    for (let i = 1; i <= daysInMonth; i++) {
-      const date = new Date(year, month, i)
-      days.push({ day: i, date })
-    }
-
-    return days
-  }
-
-  const isPastDate = (date) => {
-    if (!date) return false
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    return date < today
-  }
-
-  const isInRange = (date) => {
-    if (!date || !checkInDate || !checkOutDate) return false
-    return date > new Date(checkInDate) && date < new Date(checkOutDate)
-  }
+  const [calendarMonth, setCalendarMonth] = useState(new Date());
 
   const handleDateSelect = (date) => {
     if (isPastDate(date)) return;
-  
+
     const selectedDateStr = date.toISOString().split("T")[0];
-  
+
     if (selectingCheckIn) {
       setCheckInDate(selectedDateStr);
-      setCheckOutDate(null); // reset checkout
-      setSelectingCheckIn(false); // switch to checkout mode
+      setCheckOutDate(null);
+      setSelectingCheckIn(false);
     } else {
       if (checkInDate && date < new Date(checkInDate)) {
-        // If checkout is before checkin, treat this as new check-in
         setCheckInDate(selectedDateStr);
         setCheckOutDate(null);
-        setSelectingCheckIn(false); // switch to checkout again
+        setSelectingCheckIn(false);
       } else {
         setCheckOutDate(selectedDateStr);
-  
-        // Auto-close calendar if both dates are selected
-        if (onClose && checkInDate) {
+        if (onClose) {
           setTimeout(() => {
             onClose();
-            setSelectingCheckIn(true); // reset to check-in mode for next time
+            setSelectingCheckIn(true);
           }, 300);
         }
       }
     }
   };
 
+  const isPastDate = (date) => {
+    if (!date) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today;
+  };
+
+  const isInRange = (date) => {
+    if (!date || !checkInDate || !checkOutDate) return false;
+    return date > new Date(checkInDate) && date < new Date(checkOutDate);
+  };
+
   const getMonthName = (date) => {
-    return date.toLocaleString("default", { month: "long", year: "numeric" })
-  }
+    return date.toLocaleString("default", { month: "long", year: "numeric" });
+  };
 
   const prevMonth = () => {
-    setCalendarMonth(new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() - 1))
-  }
+    setCalendarMonth(new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() - 1));
+  };
 
   const nextMonth = () => {
-    setCalendarMonth(new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + 1))
-  }
+    setCalendarMonth(new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + 1));
+  };
 
   const clearDates = () => {
-    setCheckInDate(null)
-    setCheckOutDate(null)
-    setSelectingCheckIn(true)
-  }
+    setCheckInDate(null);
+    setCheckOutDate(null);
+    setSelectingCheckIn(true);
+  };
 
-  const formatDate = (dateString) => {
-    if (!dateString) return ""
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
-  }
+  const generateCalendarDays = (year, month) => {
+    const days = [];
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+
+    // Get the day of the week for the first day of the month
+    const startDay = firstDayOfMonth.getDay();
+
+    // Add empty days for the previous month
+    for (let i = 0; i < startDay; i++) {
+      days.push({ day: null, date: null });
+    }
+
+    // Add days for the current month
+    for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+      const date = new Date(year, month, i);
+      days.push({ day: i, date });
+    }
+
+    return days;
+  };
 
   return (
     <div className="calendar-dropdown">
-      {/* Date Input Fields */}
-      <div className="date-inputs">
-              <div
-          className={`date-input-field ${selectingCheckIn ? "active" : ""}`}
-          onClick={() => {
-            setSelectingCheckIn(true);
-            setActiveField("calendar"); // <- this ensures the dropdown shows
-          }}
-        >
-          <label>Check-in</label>
-          <div className="date-value">{checkInDate ? formatDate(checkInDate) : "Add date"}</div>
-        </div>
-
-        <div
-          className={`date-input-field ${!selectingCheckIn ? "active" : ""}`}
-          onClick={() => {
-            if (checkInDate) {
-              setSelectingCheckIn(false);
-              setActiveField("calendar"); // <- again, show the dropdown
-            }
-          }}
-        >
-          <label>Check-out</label>
-          <div className="date-value">{checkOutDate ? formatDate(checkOutDate) : "Add date"}</div>
-        </div>
-      </div>
-
       <div className="calendar-header">
         <button type="button" className="calendar-nav" onClick={prevMonth}>
           &lt;
@@ -171,7 +136,7 @@ const CalendarDropdown = ({
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CalendarDropdown
+export default CalendarDropdown;

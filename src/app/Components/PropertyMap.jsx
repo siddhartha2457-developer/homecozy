@@ -8,7 +8,6 @@ const PropertyMap = ({
   selectedProperty,
   onPropertySelect,
   zoom = 10,
-  height = "650px",
   width = "100%",
 }) => {
   const mapRef = useRef(null)
@@ -174,31 +173,31 @@ const PropertyMap = ({
 
         // Create popup content
         const popupContent = `
-          <div class="map-popup">
-            <div class="popup-image">
+          <div class="map-popup1">
+            <div class="popup-image1">
               <img src="${property.image || ""}" 
                    alt="${property.name}" 
                    />
             </div>
-            <div class="popup-content">
+            <div class="popup-content1">
               <h4>${property.name}</h4>
-              <p class="popup-location">📍 ${property.location}</p>
-              <div class="popup-details">
+              <p class="popup-location1">📍 ${property.location}</p>
+              <div class="popup-details1">
                 <span>🛏️ ${property.totalRooms || 1} Rooms</span>
                 <span>👥 Max ${property.maxAttendant || 2} Guests</span>
               </div>
-              <div class="popup-price">
-                <span class="price">₹${property.price ? property.price.toLocaleString() : "N/A"}</span>
-                <span class="per-night">per night</span>
+              <div class="popup-price1">
+                <span class="price1">₹${property.price ? property.price.toLocaleString() : "N/A"}</span>
+                <span class="per-night1">per night</span>
               </div>
-              <div class="popup-type">${property.type || "Property"}</div>
+              <div class="popup-type1">${property.type || "Property"}</div>
             </div>
           </div>
         `
 
         marker.bindPopup(popupContent, {
           maxWidth: 300,
-          className: "custom-popup",
+          className: "custom-popup1",
         })
 
         // Handle marker click
@@ -229,12 +228,12 @@ const PropertyMap = ({
   }, [properties, selectedProperty, onPropertySelect, mapLoaded])
 
   return (
-    <div className="property-map-container" style={{ width, height }}>
-      <div ref={mapRef} className="property-map" style={{ width: "100%", height: "100%" }} />
-      <div className="map-disclaimer">
+    <div className="property-map-container1" style={{ width }}>
+      <div ref={mapRef} className="property-map1" style={{ width: "100%", height: "100%" }} />
+      <div className="map-disclaimer1">
         <span>📍 Approximate locations shown for privacy</span>
       </div>
-      <div className="property-count">
+      <div className="property-count1">
         <span>{properties.length} properties found</span>
       </div>
     </div>

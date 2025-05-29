@@ -1,0 +1,120 @@
+/* Calendar Dropdown Container */
+.date-picker-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 16px;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  /* Header */
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .calendar-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* Navigation Buttons */
+  .calendar-nav {
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: #222;
+    transition: background-color 0.2s;
+  }
+  
+  .calendar-nav:hover {
+    background-color: #f7f7f7;
+  }
+  
+  /* Weekday Labels */
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #717171;
+    margin-bottom: 8px;
+  }
+  
+  /* Day Grid */
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+  
+  /* Day Styles */
+  .calendar-day {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s;
+  }
+  
+  /* Hoverable Days */
+  .calendar-day:not(.empty):not(.past):hover {
+    background-color: #02022c;
+    color: white;
+  }
+  
+  /* Empty Cells */
+  .calendar-day.empty {
+    cursor: default;
+  }
+  
+  /* Past Dates */
+  .calendar-day.past {
+    color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  /* Selected Dates */
+  .calendar-day.check-in,
+  .calendar-day.check-out {
+    background-color: #02022c;
+    color: rgb(255, 255, 255);
+  }
+  
+  /* In-between Dates */
+  .calendar-day.in-range {
+    background-color: #6da6eb;
+  }
+  
+  /* Fade In Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

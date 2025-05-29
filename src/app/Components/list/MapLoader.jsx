@@ -21,8 +21,8 @@ const MapLoader = ({ children }) => {
 
   if (!isClient) {
     return (
-      <div className="map-loading">
-        <div className="loading-spinner"></div>
+      <div className="map-loading1">
+        <div className="loading-spinner1"></div>
         <p>Loading map...</p>
       </div>
     )

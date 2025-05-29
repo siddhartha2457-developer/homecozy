@@ -149,20 +149,43 @@ const SearchBar = ({ onSearch, initialLocation = "", autoSearch = false }) => {
     }
 
     try {
-      console.log("SearchBar: Fetching location suggestions for query:", query)
-      const response = await axios.get(`https://photon.komoot.io/api/?q=${encodeURIComponent(query + " India")}&limit=40`)
-      console.log("SearchBar: Location suggestions API response:", response.data)
-
-      const suggestions = response.data.features.map((feature) => ({
-        name: feature.properties.name,
-        country: feature.properties.country,
-      }))
-      setResults(suggestions)
-      setShowSuggestions(true)
+      console.log("SearchBar: Fetching location suggestions for query:", query);
+      
+      const response = await axios.get(
+        `https://photon.komoot.io/api/?q=${encodeURIComponent(query + " India")}&limit=40`
+      );
+      
+      console.log("SearchBar: Location suggestions API response:", response.data);
+    
+      const seen = new Set(); // to track unique locations
+    
+      const suggestions = response.data.features.map((feature) => {
+        const { name, city, state, country } = feature.properties;
+    
+        return {
+          name: name || '',
+          city: city || '',
+          state: state || '',
+          country: country || ''
+        };
+      }).filter((location) => {
+        // Create a unique key from location parts
+        const key = [location.name, location.city, location.state, location.country].join('|').toLowerCase();
+    
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    
+      setResults(suggestions);
+      setShowSuggestions(true);
     } catch (error) {
-      console.error("SearchBar: Error fetching location suggestions:", error)
+      console.error("SearchBar: Error fetching location suggestions:", error);
     }
+    
   }
+
+    
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {

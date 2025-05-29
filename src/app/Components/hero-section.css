@@ -210,7 +210,7 @@
 .property-item-hero-no1 h3 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
-  color: #ff6b6b;
+  color: #f2ad1f;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -565,6 +565,39 @@
   gap: 1rem;
 }
 
+/* Guest Dropdown Done Button */
+.guest-dropdown-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f3f4f6;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.done-button-hero-no1 {
+  background-color: #07192f;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.done-button-hero-no1:hover {
+  background-color: #1e3a8a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 25, 47, 0.3);
+}
+
+.done-button-hero-no1:active {
+  transform: translateY(0);
+}
+
 .counter-btn-hero-no1 {
   width: 32px;
   height: 32px;
@@ -855,6 +888,7 @@
 
   .hero-subtitle-hero-no1 {
     font-size: 1rem;
+    display: none;
   }
 
   .search-container-hero-no1 {
@@ -875,11 +909,12 @@
   }
 
   .property-item-hero-no1 h3 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 
   .property-item-hero-no1 p {
     font-size: 0.9rem;
+    
   }
 }
 

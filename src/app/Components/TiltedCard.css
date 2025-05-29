@@ -64,13 +64,3 @@
     z-index: 3;
   } */
 
-  .tilted-card-demo-text {
-    color: white;
-    font-weight: 600;
-    left: 17vh;
-    font-size: 27px;
-    position: absolute;
-    margin-top: 120px;
-    width: 266px;
-  }
-  

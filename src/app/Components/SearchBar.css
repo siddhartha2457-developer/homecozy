@@ -241,7 +241,8 @@
 }
 
 .calendar-day:not(.empty):not(.past):hover {
-  background-color: #f7f7f7;
+  background-color: #02022c;
+  color: white;
 }
 
 .calendar-day.empty {
@@ -255,12 +256,12 @@
 
 .calendar-day.check-in,
 .calendar-day.check-out {
-  background-color: #222;
-  color: white;
+  background-color: #02022c;
+  color: rgb(255, 255, 255);
 }
 
 .calendar-day.in-range {
-  background-color: #f7f7f7;
+  background-color: #6da6eb;
 }
 
 .calendar-footer {

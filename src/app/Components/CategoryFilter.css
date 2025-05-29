@@ -6,12 +6,17 @@
 
 .category-filter-container {
   display: flex;
-  gap: 16px;
+  gap: 10px;
   overflow-x: hidden;
   scroll-behavior: smooth;
   padding: 8px 4px;
   -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -26,7 +31,7 @@
   min-width: 100px;
   padding: 12px 8px;
   border-radius: 12px;
-  background-color: white;
+  /* background-color: white; */
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); */
   cursor: pointer;
   transition: all 0.3s ease;
@@ -76,7 +81,7 @@
   font-weight: 600;
 }
 
-.nav-button {
+.nav-button1 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -96,7 +101,7 @@
   font-size: 18px;
 }
 
-.nav-button:hover {
+.nav-button1:hover {
   background-color: #f5f7fa;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -122,10 +127,10 @@
   }
 
   .label {
-    font-size: 12px;
+    font-size: 10px;
   }
 
-  .nav-button {
+  .nav-button1 {
     width: 36px;
     height: 36px;
   }
@@ -134,12 +139,16 @@
 @media (max-width: 480px) {
   .category-item {
     min-width: 80px;
-    padding: 8px 4px;
+    padding: 0;
   }
 
   .icon-wrapper {
     width: 36px;
     height: 36px;
     font-size: 16px;
+  }
+  .category-filter-wrapper {
+    
+    margin: 0;
   }
 }

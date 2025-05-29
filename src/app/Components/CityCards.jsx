@@ -30,6 +30,23 @@ const cities = [
     country: 'India',
     image: '/varanasi.jpg',
   },
+  {
+    name: 'Mumbai',
+    country: 'India',
+    image: '/mumbai.jpg',
+  },
+  {
+    name: 'Mumbai',
+    country: 'India',
+    image: '/mumbai.jpg',
+  },
+  {
+    name: 'Mumbai',
+    country: 'India',
+    image: '/mumbai.jpg',
+  },
+  
+
 ];
 
 const CityCards = () => {
@@ -37,7 +54,7 @@ const CityCards = () => {
     <>
       <h2 className="citycard-heading">Destinations</h2>
       <section className="city-cards-container">
-        <div className="top-row">
+        {/* <div className="top-row">
           {cities.slice(0, 2).map((city, index) => (
             <div key={index} className="city-card large">
               <TiltedCard
@@ -60,17 +77,17 @@ const CityCards = () => {
               />
             </div>
           ))}
-        </div>
+        </div> */}
 
         <div className="bottom-row">
-          {cities.slice(2).map((city, index) => (
+          {cities.slice(0,8).map((city, index) => (
             <div key={index} className="city-card">
               <TiltedCard
                 imageSrc={city.image}
                 altText={`${city.name}, ${city.country}`}
                 containerHeight="100%"
                 containerWidth="100%"
-                imageHeight="285px"
+                imageHeight="100%"
                 imageWidth="100%"
                 rotateAmplitude={12}
                 scaleOnHover={1.2}

@@ -282,12 +282,9 @@ export default function Search() {
     setSearchLocation(searchTerm);
   };
 
-  // Handle search from SearchBar
   const handleSearch = (searchTerm) => {
     console.log("Search triggered with term:", searchTerm);
     filterByLocation(searchTerm);
-
-    // Clear existing filters when doing a new search
     setSelectedPropertyType(null);
     setSelectedCategories([]);
   };

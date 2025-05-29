@@ -33,7 +33,7 @@
   border: none;
 }
 
-.marker-pin {
+.marker-pin1 {
   position: relative;
   width: 30px;
   height: 30px;
@@ -45,7 +45,7 @@
   cursor: pointer;
 }
 
-.marker-pin.selected {
+.marker-pin1.selected {
   width: 40px;
   height: 40px;
   background: linear-gradient(135deg, #e5863e 0%, #e36a0e 100%);
@@ -53,7 +53,7 @@
   animation: pulse 2s infinite;
 }
 
-.marker-content {
+.marker-content1 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -72,7 +72,7 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 } */
 
-.marker-price {
+.marker-price1 {
   display: block;
   width: 10px;
   height: 10px;
@@ -80,7 +80,7 @@
   border-radius: 50%;
 }
 
-.marker-pin.selected .marker-price {
+.marker-pin1.selected .marker-price1 {
   font-size: 16px;
 }
 
@@ -215,21 +215,21 @@
     font-size: 0.7rem;
   }
 
-  .marker-pin {
+  .marker-pin1 {
     width: 35px;
     height: 35px;
   }
 
-  .marker-pin.selected {
+  .marker-pin1.selected {
     width: 45px;
     height: 45px;
   }
 
-  .marker-price {
+  .marker-price1 {
     font-size: 12px;
   }
 
-  .marker-pin.selected .marker-price {
+  .marker-pin1.selected .marker-price1 {
     font-size: 14px;
   }
 

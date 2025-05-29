@@ -17,6 +17,7 @@ import MapLoader from "../../Components/list/MapLoader";
 import PropertyLocationMap from "../../Components/list/PropertyLocationMap";
 import loading from '../../animation/loading-anime.json';
 import Lottie from "react-lottie";
+import AboutSection from "../../Components/list/AboutSection";
 
 export default function ListingPage({ params }) {
   const { id: listingId } = React.use(params)
@@ -299,6 +300,7 @@ export default function ListingPage({ params }) {
                 rating={listing.PropertyFullPrice[0]?.rating || 0}
                 reviews={listing.PropertyFullPrice[0]?.reviews || 0}
               />
+              {/* <AboutSection></AboutSection> */}
               <Amenities amenities={listing.PropertyAminity[0]?.amenities || []} />
 
               <div className="map-section">

@@ -232,7 +232,8 @@ function BookingWidget({
           console.log("Booking successful:", result);
   
           // Show success message
-          alert(`Thank you for your booking, ${formData.name}! Your booking has been confirmed.`);
+          alert(`Hey ${formData.name}, thanks for booking! Our team will reach out to you soon.`);
+
   
           // Reset form and state
           setFormData({

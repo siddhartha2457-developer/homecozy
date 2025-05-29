@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation"
 import { Calendar, MapPin, Users, Menu, X, Search, ChevronLeft, ChevronRight } from "lucide-react"
 import axios from "axios"
 import "./hero-section.css"
+import CalendarDropdown from "./CalendarDropdown";
+import "./CalendarDropdown";
 
 export default function HeroSection() {
   const router = useRouter()
@@ -31,9 +33,12 @@ export default function HeroSection() {
   const [showLocationSuggestions, setShowLocationSuggestions] = useState(false)
   const [loadingSuggestions, setLoadingSuggestions] = useState(false)
 
-  // Calendar states
-  const [calendarMonth, setCalendarMonth] = useState(new Date())
+
   const [selectingCheckIn, setSelectingCheckIn] = useState(true)
+    // Calendar states - Updated to match SearchBar
+    const [checkInDate, setCheckInDate] = useState<string | null>(null)
+    const [checkOutDate, setCheckOutDate] = useState<string | null>(null)
+  // const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
   // Refs for dropdowns
   const locationDropdownRef = useRef<HTMLDivElement | null>(null)
@@ -171,12 +176,14 @@ export default function HeroSection() {
     const urlParams = new URLSearchParams()
     urlParams.set("q", searchParams.location)
 
-    if (searchParams.checkIn) {
-      urlParams.set("checkIn", searchParams.checkIn)
+    // if (searchParams.checkIn) {
+    //   urlParams.set("checkIn", searchParams.checkIn)
+    if (checkInDate) {
+      urlParams.set("checkIn", checkInDate)
     }
 
-    if (searchParams.checkOut) {
-      urlParams.set("checkOut", searchParams.checkOut)
+    if (checkOutDate) {
+      urlParams.set("checkOut", checkOutDate)
     }
 
     urlParams.set("adults", guestCount.adults.toString())
@@ -214,74 +221,20 @@ export default function HeroSection() {
     setShowLocationSuggestions(false)
   }
 
-  // Calendar functions
-  const generateCalendarDays = (year: number, month: number) => {
-    const firstDay = new Date(year, month, 1)
-    const lastDay = new Date(year, month + 1, 0)
-    const daysInMonth = lastDay.getDate()
-    const startingDayOfWeek = firstDay.getDay()
-
-    const days = []
-
-    for (let i = 0; i < startingDayOfWeek; i++) {
-      days.push({ day: null, date: null })
-    }
-
-    for (let i = 1; i <= daysInMonth; i++) {
-      const date = new Date(year, month, i)
-      days.push({ day: i, date })
-    }
-
-    return days
-  }
-
-  const isPastDate = (date: Date | null) => {
-    if (!date) return false
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    return date < today
-  }
-
-  const isInRange = (date: Date | null) => {
-    if (!date || !searchParams.checkIn || !searchParams.checkOut) return false
-    const checkIn = new Date(searchParams.checkIn)
-    const checkOut = new Date(searchParams.checkOut)
-    return date > checkIn && date < checkOut
-  }
-
-  const handleDateSelect = (date: Date) => {
-    if (isPastDate(date)) return
-
-    if (selectingCheckIn) {
-      setSearchParams((prev) => ({ ...prev, checkIn: date.toISOString().split("T")[0], checkOut: "" }))
-      setSelectingCheckIn(false)
-    } else {
-      if (searchParams.checkIn && date < new Date(searchParams.checkIn)) {
-        setSearchParams((prev) => ({ ...prev, checkIn: date.toISOString().split("T")[0], checkOut: "" }))
-      } else {
-        setSearchParams((prev) => ({ ...prev, checkOut: date.toISOString().split("T")[0] }))
-        setActiveField(null)
-      }
-    }
-  }
-
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString: string | null) => {
     if (!dateString) return ""
     const date = new Date(dateString)
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
   }
 
-  const getMonthName = (date: Date) => {
-    return date.toLocaleString("default", { month: "long", year: "numeric" })
-  }
-
-  const prevMonth = () => {
-    setCalendarMonth(new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() - 1))
-  }
-
-  const nextMonth = () => {
-    setCalendarMonth(new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + 1))
-  }
+   // Update searchParams when dates change
+   useEffect(() => {
+    setSearchParams((prev) => ({
+      ...prev,
+      checkIn: checkInDate || "",
+      checkOut: checkOutDate || "",
+    }))
+  }, [checkInDate, checkOutDate])
 
   return (
     <section className="hero-container-hero-no1">
@@ -306,7 +259,7 @@ export default function HeroSection() {
 
       <div className="hero-content-hero-no1">
         <div className="hero-text-container-hero-no1">
-          <h1 className="hero-title-hero-no1">CozyHomeStays</h1>
+          <h1 className="hero-title-hero-no1">Stays with Heart</h1>
           <p className="hero-subtitle-hero-no1">Discover your perfect getaway</p>
 
           <div className="property-carousel-hero-no1">
@@ -389,67 +342,23 @@ export default function HeroSection() {
                 <div className="search-field-content-hero-no1">
                   <label htmlFor="dates">Dates</label>
                   <div className="date-display-hero-no1">
-                    <span>{searchParams.checkIn ? formatDate(searchParams.checkIn) : "Check in"}</span>
+                    <span>{checkInDate ? formatDate(checkInDate) : "Check in"}</span>
                     <span className="date-separator-hero-no1">→</span>
-                    <span>{searchParams.checkOut ? formatDate(searchParams.checkOut) : "Check out"}</span>
+                    <span>{checkOutDate ? formatDate(checkOutDate) : "Check out"}</span>
                   </div>
                 </div>
 
                 {(activeField === "checkIn" || activeField === "checkOut") && (
                   <div className="search-dropdown-hero-no1 date-dropdown-hero-no1" ref={dateDropdownRef}>
-                    <div className="calendar-header-hero-no1">
-                      <button type="button" className="calendar-nav-hero-no1" onClick={prevMonth}>
-                        <ChevronLeft size={20} />
-                      </button>
-                      <h3 className="calendar-month-hero-no1">{getMonthName(calendarMonth)}</h3>
-                      <button type="button" className="calendar-nav-hero-no1" onClick={nextMonth}>
-                        <ChevronRight size={20} />
-                      </button>
-                    </div>
-                    <div className="calendar-weekdays-hero-no1">
-                      {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
-                        <div key={day} className="weekday-hero-no1">
-                          {day}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="calendar-days-hero-no1">
-                      {generateCalendarDays(calendarMonth.getFullYear(), calendarMonth.getMonth()).map((day, index) => (
-                        <div
-                          key={index}
-                          className={`calendar-day-hero-no1 ${!day.day ? "empty" : ""} ${
-                            day.date &&
-                            searchParams.checkIn &&
-                            day.date.toISOString().split("T")[0] === searchParams.checkIn
-                              ? "check-in"
-                              : ""
-                          } ${
-                            day.date &&
-                            searchParams.checkOut &&
-                            day.date.toISOString().split("T")[0] === searchParams.checkOut
-                              ? "check-out"
-                              : ""
-                          } ${day.date && isInRange(day.date) ? "in-range" : ""} ${
-                            day.date && isPastDate(day.date) ? "past" : ""
-                          }`}
-                          onClick={() => day.day && !isPastDate(day.date) && handleDateSelect(day.date!)}
-                        >
-                          {day.day}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="calendar-footer-hero-no1">
-                      <button
-                        type="button"
-                        className="clear-dates-hero-no1"
-                        onClick={() => {
-                          setSearchParams((prev) => ({ ...prev, checkIn: "", checkOut: "" }))
-                          setSelectingCheckIn(true)
-                        }}
-                      >
-                        Clear dates
-                      </button>
-                    </div>
+                     <CalendarDropdown
+                      checkInDate={checkInDate}
+                      checkOutDate={checkOutDate}
+                      setCheckInDate={setCheckInDate}
+                      setCheckOutDate={setCheckOutDate}
+                      selectingCheckIn={selectingCheckIn}
+                      setSelectingCheckIn={setSelectingCheckIn}
+                      onClose={() => setActiveField(null)}
+                    />
                   </div>
                 )}
               </div>
@@ -552,6 +461,19 @@ export default function HeroSection() {
                           <span className="toggle-slider-hero-no1"></span>
                         </label>
                       </div>
+                     {/* Done Button */}
+                            <div className="guest-dropdown-footer">
+                            <button
+                                  type="button"
+                                  className="done-button-hero-no1"
+                                  onMouseDown={() => {
+                                    setActiveField(null);
+                                    setShowLocationSuggestions(false);
+                                  }}
+                                >
+                                  Done
+                                </button>
+                              </div>
                     </div>
                   </div>
                 )}

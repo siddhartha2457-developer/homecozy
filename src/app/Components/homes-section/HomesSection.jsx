@@ -1,63 +1,64 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import styles from "./HomesSection.module.css"
-import HomeCard from "./HomeCard"
-import LoadingSkeleton from "./LoadingSkeleton"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useSwipeable } from "react-swipeable"; // Import react-swipeable
+import styles from "./HomesSection.module.css";
+import HomeCard from "./HomeCard";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 const HomesSection = () => {
-  const [homes, setHomes] = useState([])
-  const [startIndex, setStartIndex] = useState(0)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [visibleCount, setVisibleCount] = useState(4)
+  const [homes, setHomes] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   // Update visible count based on screen size
   useEffect(() => {
     const updateVisibleCount = () => {
-      const width = window.innerWidth
+      const width = window.innerWidth;
       if (width < 480) {
-        setVisibleCount(1)
+        setVisibleCount(1);
       } else if (width < 768) {
-        setVisibleCount(2)
+        setVisibleCount(2);
       } else if (width < 1024) {
-        setVisibleCount(3)
+        setVisibleCount(3);
       } else {
-        setVisibleCount(4)
+        setVisibleCount(4);
       }
-    }
+    };
 
-    updateVisibleCount()
-    window.addEventListener("resize", updateVisibleCount)
-    return () => window.removeEventListener("resize", updateVisibleCount)
-  }, [])
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
 
   // Fetch data from the backend API
   useEffect(() => {
     const fetchHomes = async () => {
       try {
-        setLoading(true)
-        setError(null)
+        setLoading(true);
+        setError(null);
 
-        const response = await fetch("https://host.cozyhomestays.com/api/scearch")
-        const data = await response.json()
+        const response = await fetch("https://host.cozyhomestays.com/api/scearch");
+        const data = await response.json();
 
         if (!data || !data.success || !Array.isArray(data.data)) {
-          throw new Error("Invalid API response")
+          throw new Error("Invalid API response");
         }
 
         const mappedHomes = data.data.map((property) => {
-          const fullPropertyDetails = property.fullproperty && property.fullproperty[0]
+          const fullPropertyDetails = property.fullproperty && property.fullproperty[0];
 
-          let mainImage = ""
+          let mainImage = "";
           if (fullPropertyDetails && fullPropertyDetails.mediaInput) {
-            const mainImageObj = fullPropertyDetails.mediaInput.find((img) => img.isMain)
+            const mainImageObj = fullPropertyDetails.mediaInput.find((img) => img.isMain);
             if (mainImageObj) {
-              mainImage = mainImageObj.path.replace(/\\/g, "/")
+              mainImage = mainImageObj.path.replace(/\\/g, "/");
               if (!mainImage.startsWith("http")) {
-                mainImage = `https://host.cozyhomestays.com/${mainImage}`
+                mainImage = `https://host.cozyhomestays.com/${mainImage}`;
               }
             }
           }
@@ -70,33 +71,43 @@ const HomesSection = () => {
             rating: property.PropertyFullPrice?.[0]?.rating || 4.5,
             ratingText: property.PropertyFullPrice?.[0]?.ratingText || "27 reviews",
             price: property.PropertyFullPrice?.[0]?.fullprice || 0,
-          }
-        })
+          };
+        });
 
         // Limit to exactly 15 cards
-        setHomes(mappedHomes.reverse().slice(0, 15))
+        setHomes(mappedHomes.reverse().slice(0, 15));
       } catch (error) {
-        console.error("Error fetching homes:", error)
-        setError("Failed to load properties. Please try again later.")
+        console.error("Error fetching homes:", error);
+        setError("Failed to load properties. Please try again later.");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchHomes()
-  }, [])
+    fetchHomes();
+  }, []);
 
   const handlePrev = () => {
-    setStartIndex((prev) => Math.max(prev - 1, 0))
-  }
+    setStartIndex((prev) => Math.max(prev - 1, 0));
+  };
 
   const handleNext = () => {
-    setStartIndex((prev) => Math.min(prev + 1, homes.length - visibleCount))
-  }
+    setStartIndex((prev) => Math.min(prev + 1, homes.length - visibleCount));
+  };
 
-  const canGoPrev = startIndex > 0
-  const canGoNext = startIndex + visibleCount < homes.length
-  const visibleHomes = homes.slice(startIndex, startIndex + visibleCount)
+  const canGoPrev = startIndex > 0;
+  const canGoNext = startIndex + visibleCount < homes.length;
+
+  // Swipe handlers
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => {
+      if (canGoNext) handleNext();
+    },
+    onSwipedRight: () => {
+      if (canGoPrev) handlePrev();
+    },
+    trackMouse: true, // Enable mouse dragging
+  });
 
   if (loading) {
     return (
@@ -106,7 +117,7 @@ const HomesSection = () => {
         </div>
         <LoadingSkeleton count={visibleCount} />
       </section>
-    )
+    );
   }
 
   if (error) {
@@ -122,7 +133,7 @@ const HomesSection = () => {
           </button>
         </div>
       </section>
-    )
+    );
   }
 
   if (homes.length === 0) {
@@ -135,7 +146,7 @@ const HomesSection = () => {
           <p>No properties available at the moment.</p>
         </div>
       </section>
-    )
+    );
   }
 
   return (
@@ -162,7 +173,7 @@ const HomesSection = () => {
         </div>
       </div>
 
-      <div className={styles.carouselWrapper}>
+      <div className={styles.carouselWrapper} {...swipeHandlers}>
         <div className={styles.carouselContainer}>
           <div
             className={styles.cardContainer}
@@ -179,7 +190,7 @@ const HomesSection = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default HomesSection
+export default HomesSection;

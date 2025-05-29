@@ -1,0 +1,255 @@
+.calendar-dropdown {
+  background-color: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+  min-width: 320px;
+}
+
+/* Date Input Fields */
+.date-inputs {
+  display: flex;
+  gap: 1px;
+  margin-bottom: 16px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.date-input-field {
+  flex: 1;
+  padding: 12px;
+  background-color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.date-input-field.active {
+  background-color: #07192f;
+  color: white;
+}
+
+.date-input-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.date-input-field .date-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: inherit;
+}
+
+.date-input-field:not(.active) .date-value {
+  color: #6b7280;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.calendar-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.calendar-nav {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: #222;
+  transition: background-color 0.2s;
+}
+
+.calendar-nav:hover {
+  background-color: #f7f7f7;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #717171;
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays div {
+  padding: 8px 0;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-day {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  color: #333;
+}
+
+.calendar-day:not(.empty):not(.past):hover {
+  background-color: #07192f;
+  color: white;
+  transform: scale(1.05);
+}
+
+.calendar-day.empty {
+  cursor: default;
+}
+
+.calendar-day.past {
+  color: #ddd;
+  cursor: not-allowed;
+}
+
+.calendar-day.check-in,
+.calendar-day.check-out {
+  background-color: #07192f;
+  color: white;
+  font-weight: 600;
+}
+
+.calendar-day.in-range {
+  background-color: rgba(7, 25, 47, 0.1);
+  color: #07192f;
+}
+
+.calendar-footer {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clear-dates {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.clear-dates:hover {
+  color: #07192f;
+  background-color: #f7f7f7;
+}
+
+/* Animation for dropdown */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .calendar-dropdown {
+    min-width: 280px;
+    padding: 12px;
+  }
+
+  .date-inputs {
+    margin-bottom: 12px;
+  }
+
+  .date-input-field {
+    padding: 10px;
+  }
+
+  .date-input-field label {
+    font-size: 11px;
+  }
+
+  .date-input-field .date-value {
+    font-size: 13px;
+  }
+
+  .calendar-day {
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .calendar-weekdays div {
+    font-size: 10px;
+    padding: 6px 0;
+  }
+
+  .calendar-header h3 {
+    font-size: 14px;
+  }
+
+  .calendar-nav {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-dropdown {
+    min-width: 260px;
+    padding: 10px;
+  }
+
+  .date-input-field {
+    padding: 8px;
+  }
+
+  .date-input-field label {
+    font-size: 10px;
+  }
+
+  .date-input-field .date-value {
+    font-size: 12px;
+  }
+
+  .calendar-day {
+    height: 32px;
+    font-size: 11px;
+  }
+
+  .calendar-weekdays div {
+    font-size: 9px;
+    padding: 4px 0;
+  }
+}

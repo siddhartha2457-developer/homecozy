@@ -70,7 +70,7 @@
 .tab-label {
   font-size: 13px;
   font-weight: 500;
-  color: #475569;
+  color: black;
   transition: all 0.3s ease;
   text-align: center;
   line-height: 1.2;
@@ -106,11 +106,11 @@
   .property-type-tab {
     min-width: 100px;
     padding: 10px 6px;
-    gap: 4px;
+    gap: 5px;
   }
 
   .tab-icon {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .tab-label {
@@ -132,7 +132,7 @@
   }
 
   .tab-icon {
-    font-size: 16px;
+    font-size: 24px;
   }
 
   .tab-label {
@@ -152,11 +152,11 @@
   .property-type-tab {
     min-width: 80px;
     padding: 6px 3px;
-    gap: 3px;
+    gap: 4px;
   }
 
   .tab-icon {
-    font-size: 14px;
+    font-size: 20px;
   }
 
   .tab-label {

@@ -177,7 +177,7 @@ const PropertyLocationMap = ({ propertyData }) => {
   return (
     <div className="property-location-map-container">
       <div className="map-header">
-        <h3>Where you'll be</h3>
+      <h3>Your stay location</h3>
         <p className="location-description">{location.mapAddress || location.fullAddress}</p>
       </div>
 

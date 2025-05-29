@@ -17,6 +17,7 @@ import CollectionSection from '../app/Components/CollectionSection';
 // import CategoryFilter from '../../Components/CategoryFilter';s
 // import HeroSection from '../app/Components/Herosection';
 import HeroSection from './Components/hero-section';
+
 // import PegimHero from './Components/pegim-hero';
 
 const Homepage = () => {
@@ -25,6 +26,7 @@ const Homepage = () => {
     {/* <Navbar /> */}
     {/* <PegimHero></PegimHero> */}
     <HeroSection></HeroSection>
+    
 
     {/* <HeroSearch /> */}
     <div className='home-page'>

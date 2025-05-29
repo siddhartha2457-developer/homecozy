@@ -175,7 +175,7 @@
 .propertyCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  border-color: #e2e8f0;
+  /* border-color: #e2e8f0; */
 }
 
 .selectedCard {
@@ -345,7 +345,7 @@
   }
 
   .propertyInfo {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
 }
 
@@ -438,16 +438,16 @@
   }
 
   .propertyMeta {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     gap: 0.75rem;
   }
 
-  .activeFilters {
+  /* .activeFilters {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-  }
+  } */
 
   .filterTags {
     width: 100%;
@@ -493,7 +493,7 @@
   }
 
   .propertyDetails {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
   }
 
@@ -588,12 +588,23 @@
 
   .filterTag {
     font-size: 0.75rem;
-    padding: 0.2rem 0.5rem;
+    padding: 0.6rem 0.6rem;
   }
 
   .clearFilters {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
+  }
+  .filtersContainer {
+    gap: 0.5rem;
+    margin: 0;
+  }
+  .mapSection {
+    order: 1;
+    position: relative;
+    top: 0;
+    height: 250px;
+    padding: 14px;
   }
 }
 
@@ -640,7 +651,7 @@
 @media (prefers-color-scheme: dark) {
   .propertyCard {
     background-color: white;
-    border-color: white;
+    /* border-color: white; */
   }
 
   .propertyInfo h3 {

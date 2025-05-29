@@ -1,0 +1,89 @@
+.calendar-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 16px;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #717171;
+    margin-bottom: 8px;
+  }
+  
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+  
+  .calendar-day {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s;
+  }
+  
+  .calendar-day:not(.empty):not(.past):hover {
+    background-color: #02022c;
+    color: white;
+  }
+  
+  .calendar-day.empty {
+    cursor: default;
+  }
+  
+  .calendar-day.past {
+    color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .calendar-day.check-in,
+  .calendar-day.check-out {
+    background-color: #02022c;
+    color: rgb(255, 255, 255);
+  }
+  
+  .calendar-day.in-range {
+    background-color: #6da6eb;
+  }
+  
+  .calendar-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .clear-dates {
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .clear-dates:hover {
+    color: #0071c2;
+  }

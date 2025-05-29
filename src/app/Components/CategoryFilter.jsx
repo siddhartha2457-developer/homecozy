@@ -176,7 +176,7 @@ const CategoryFilter = ({
   return (
     <div className="category-filter-wrapper">
       {showLeftArrow && (
-        <button className="nav-button left-button" onClick={() => scroll("left")} aria-label="Scroll left">
+        <button className="nav-button1 left-button" onClick={() => scroll("left")} aria-label="Scroll left">
           <FaChevronLeft />
         </button>
       )}
@@ -195,7 +195,7 @@ const CategoryFilter = ({
       </div>
 
       {showRightArrow && (
-        <button className="nav-button right-button" onClick={() => scroll("right")} aria-label="Scroll right">
+        <button className="nav-button1 right-button" onClick={() => scroll("right")} aria-label="Scroll right">
           <FaChevronRight />
         </button>
       )}

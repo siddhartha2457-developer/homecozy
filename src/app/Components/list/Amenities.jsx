@@ -61,7 +61,7 @@ const Amenities = ({ amenities }) => {
 
   return (
     <div className="amenities-container">
-      <h2 className="text-xl font-semibold mb-4">What this place offers</h2>
+      <h2 className="amenties-headline">Included Amenities</h2>
 
       <div className={`amenities-grid ${showAll ? "expanded" : ""}`}>
         {displayedAmenities.map((amenity, index) => (
@@ -84,6 +84,13 @@ const Amenities = ({ amenities }) => {
         .amenities-container {
           padding: 24px 0;
           border-bottom: 1px solid #DDDDDD;
+        }
+
+        .amenties-headline {
+
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
         }
 
         .amenities-grid {

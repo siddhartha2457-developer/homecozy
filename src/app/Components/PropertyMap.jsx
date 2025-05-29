@@ -116,11 +116,11 @@ const PropertyMap = ({
 
       // Create custom icons
       const defaultIcon = L.divIcon({
-        className: "custom-marker",
+        className: "custom-marker1",
         html: `
-          <div class="marker-pin">
-            <div class="marker-content">
-              <span class="marker-price"></span>
+          <div class="marker-pin1">
+            <div class="marker-content1">
+              <span class="marker-price1"></span>
             </div>
           </div>
         `,
@@ -129,11 +129,11 @@ const PropertyMap = ({
       })
 
       const selectedIcon = L.divIcon({
-        className: "custom-marker selected",
+        className: "custom-marker1 selected",
         html: `
-          <div class="marker-pin selected">
-            <div class="marker-content">
-              <span class="marker-price"></span>
+          <div class="marker-pin1 selected">
+            <div class="marker-content1">
+              <span class="marker-price1"></span>
             </div>
           </div>
         `,

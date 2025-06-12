@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import Image from "next/image"; // <-- Import Next.js Image
 import "./TiltedCard.css";
 
 const springValues = {
@@ -103,20 +104,24 @@ export default function TiltedCard({
           scale,
         }}
       >
-        <motion.img
+        <Image
           src={imageSrc}
           alt={altText}
-          className="tilted-card-img"
+          width={400} // Set a fixed width
+          height={300} // Set a fixed height
           style={{
-            width: imageWidth,
-            height: imageHeight,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
           }}
+          placeholder="blur"
+          blurDataURL="/placeholder.svg"
+          loading="lazy"
+          className="tilted-card-img"
         />
 
         {displayOverlayContent && overlayContent && (
-          <motion.div
-            className="tilted-card-overlay"
-          >
+          <motion.div className="tilted-card-overlay">
             {overlayContent}
           </motion.div>
         )}

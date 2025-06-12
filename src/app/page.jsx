@@ -14,14 +14,14 @@ import Footer from '../app/Components/Footer';
 import CollectionSection from '../app/Components/CollectionSection';
 
 // import FullScreenLoader from '../../Components/FullScreenLoader';
-// import CategoryFilter from '../../Components/CategoryFilter';
+// import CategoryFilter from '../../Components/CategoryFilter'
+
 
 
 
 
 
 import HeroSection from './Components/hero-section';
-import DestinationsSection from './Components/destinations-section';
 
 // import PegimHero from './Components/pegim-hero';
 
@@ -36,7 +36,7 @@ const Homepage = () => {
 
     
     <div className='home-page'>
-      <DestinationsSection></DestinationsSection>
+      
       <CityCards />
       
      

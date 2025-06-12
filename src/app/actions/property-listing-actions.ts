@@ -121,7 +121,6 @@ function formatPropertyListingEmail(data: PropertyListingData) {
             <strong>Next Steps:</strong>
             <ul>
               <li>Contact the owner within 24 hours</li>
-              <li>Schedule a property visit</li>
               <li>Help them complete their listing</li>
               <li>Arrange professional photography if needed</li>
             </ul>
@@ -172,9 +171,8 @@ function formatOwnerConfirmationEmail(data: PropertyListingData) {
           <div class="steps">
             <h3>🚀 What Happens Next:</h3>
             <div class="step">1. Our team will contact you within 24 hours</div>
-            <div class="step">2. We'll schedule a convenient time to visit your property</div>
-            <div class="step">3. Help you create an amazing listing with professional photos</div>
-            <div class="step">4. Your property goes live and starts earning!</div>
+            <div class="step">2. Help you create an amazing listing with professional photos</div>
+            <div class="step">3. Your property goes live and starts earning!</div>
           </div>
           
           <p>In the meantime, feel free to gather any additional information about your property that might be helpful, such as:</p>

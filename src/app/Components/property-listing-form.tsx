@@ -113,13 +113,13 @@ export default function PropertyListingForm() {
     <section className="listing-form-section">
       <div className="listing-form-background">
         <div className="listing-form-overlay"></div>
-        <div className="animated-villas">
+        {/* <div className="animated-villas">
           <div className="villa villa-1"></div>
           <div className="villa villa-2"></div>
           <div className="villa villa-3"></div>
           <div className="villa villa-4"></div>
           <div className="villa villa-5"></div>
-        </div>
+        </div> */}
         <div className="floating-elements">
           {Array.from({ length: 25 }).map((_, index) => (
             <div

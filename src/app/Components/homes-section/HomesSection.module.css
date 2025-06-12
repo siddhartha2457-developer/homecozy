@@ -425,11 +425,11 @@
   }
 
   .cardLink {
-    width: calc(100% - 8px); /* 1 card on small mobile */
+    width: calc(100% - 0px); /* 1 card on small mobile */
   }
 
   .skeletonCard {
-    width: calc(100% - 8px);
+    width: calc(100% - 0px);
   }
 
   .cardContainer {

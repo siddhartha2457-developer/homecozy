@@ -383,7 +383,7 @@ function BookingWidget({
     <div className="booking-widget">
       <div className="price-section">
         <div className="price">
-          <span className="price-amount">{currency}{totalPrice.toLocaleString()}</span>
+          <span className="price-amount">{currency} {Math.round(totalPrice).toLocaleString()}</span>
           <span className="price-nights">
   for {checkInDate && checkOutDate ? nights : 1} night{(checkInDate && checkOutDate ? nights : 1) > 1 ? 's' : ''}
 </span>
@@ -703,7 +703,7 @@ function BookingWidget({
             </div>
             <div className="summary-row total">
               <span>Total</span>
-              <span>{currency}{totalPrice.toLocaleString()}</span>
+              <span>{currency} {Math.round(totalPrice).toLocaleString()}</span>
             </div>
           </div>
           

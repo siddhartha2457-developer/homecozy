@@ -9,42 +9,42 @@ const cities = [
   {
     name: 'New Delhi',
     country: 'India',
-    image: '/delhi.jpg',
+    image: '/delhi.webp',
   },
   {
     name: 'Manali',
     country: 'India',
-    image: '/manali.jpg',
+    image: '/manali.webp',
   },
   {
     name: 'Mumbai',
     country: 'India',
-    image: '/mumbai.jpg',
+    image: '/mumbai.webp',
   },
   {
     name: 'Chennai',
     country: 'India',
-    image: '/chennai.jpg',
+    image: '/chennai.webp',
   },
   {
     name: 'Varanasi',
     country: 'India',
-    image: '/varanasi.jpg',
+    image: '/varanasi.webp',
   },
   {
     name: 'Kasol',
     country: 'India',
-    image: '/kasol.jpg',
+    image: '/kasol.webp',
   },
   {
     name: 'Rishikesh',
     country: 'India',
-    image: '/rishikesh.jpg',
+    image: '/rishikesh.webp',
   },
   {
     name: 'Shimla',
     country: 'India',
-    image: '/shimla.jpg',
+    image: '/shimla.webp',
   },
 ];
 

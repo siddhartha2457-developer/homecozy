@@ -152,8 +152,7 @@ export default function PixelCard({
   const finalNoFocus = noFocus ?? variantCfg.noFocus;
 
   useEffect(() => {
-    // Check for reduced motion preference in the browser
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
       const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       setReducedMotion(mediaQuery.matches);
 

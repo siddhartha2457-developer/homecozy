@@ -79,6 +79,7 @@ function ImageModal({ images, selectedIndex: initialIndex = 0, onClose, onNext, 
               className="modal-image"
               onLoad={handleImageLoad}
               style={{ opacity: isLoading ? 0 : 1 }}
+              loading="lazy"
             />
           )}
         </div>
@@ -100,11 +101,11 @@ function ImageModal({ images, selectedIndex: initialIndex = 0, onClose, onNext, 
           >
             {media.mimetype === "video" ? (
               <div className="video-thumbnail">
-                <img src={media.url || "/placeholder.svg?height=100&width=100"} alt={`Thumbnail ${index + 1}`} />
-                <div className="video-icon">▶</div>
+                <img src={ "/video-placeholder.png"} alt={`Thumbnail ${index + 1}`} />
+                {/* <div className="video-icon">▶</div> */}
               </div>
             ) : (
-              <img src={media.url || "/placeholder.svg?height=100&width=100"} alt={`Thumbnail ${index + 1}`} />
+              <img src={media.url || "/placeholder.svg"} alt={`Thumbnail ${index + 1}`} />
             )}
           </div>
         ))}

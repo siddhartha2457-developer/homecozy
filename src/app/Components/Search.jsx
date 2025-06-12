@@ -80,7 +80,7 @@ export default function Search() {
           mainImage = mainImageObj.path.replace(/\\/g, "/")
           // Ensure the URL is absolute
           if (!mainImage.startsWith("http")) {
-            mainImage = `https://host.cozyhomestays.com/${mainImage}`
+            mainImage = `https://sampledemo.shop/${mainImage}`
           }
         }
       }
@@ -180,7 +180,7 @@ export default function Search() {
     try {
       console.log("Fetching all properties...")
       // Fetch without any query parameter to get all properties
-      const response = await axios.get("https://host.cozyhomestays.com/api/scearch")
+      const response = await axios.get("https://sampledemo.shop/api/scearch")
       console.log("API Response:", response.data)
 
       const processedProperties = processApiData(response.data)
@@ -341,6 +341,16 @@ export default function Search() {
       element.scrollIntoView({ behavior: "smooth", block: "center" })
     }
   }
+
+useEffect(() => {
+  if (selectedProperty) {
+    const element = document.getElementById(`property-${selectedProperty}`);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+}, [selectedProperty]);
+
 
   const clearAllFilters = () => {
     console.log("Clearing all filters")

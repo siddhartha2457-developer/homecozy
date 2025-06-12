@@ -12,7 +12,7 @@ const Amenities = ({ amenities }) => {
   useEffect(() => {
     const fetchAmenities = async () => {
       try {
-        const response = await fetch("https://host.cozyhomestays.com/api/aminity");
+        const response = await fetch("https://sampledemo.shop/api/aminity");
         const data = await response.json();
         const map = {};
         data.aminity.forEach((item) => {

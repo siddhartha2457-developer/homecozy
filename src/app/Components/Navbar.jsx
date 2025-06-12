@@ -12,11 +12,11 @@ const Navbar = () => {
             <span className="logo">CozyHomeStays</span>
           </Link>
         </div>
-        {/* <div className="navbar-right">
-          <Link href="#" className="property-link">List your property</Link>
-          <button className="nav-btn">Register</button>
-          <button className="nav-btn">Sign in</button>
-        </div> */}
+        <div className="navbar-right">
+          <Link href="/listproperty" className="property-link">List your property</Link>
+          {/* <button className="nav-btn">Register</button>
+          <button className="nav-btn">Sign in</button> */}
+        </div>
       </div>
       {/* <SearchBar></SearchBar> */}
     </nav>

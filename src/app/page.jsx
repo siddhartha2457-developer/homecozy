@@ -14,9 +14,14 @@ import Footer from '../app/Components/Footer';
 import CollectionSection from '../app/Components/CollectionSection';
 
 // import FullScreenLoader from '../../Components/FullScreenLoader';
-// import CategoryFilter from '../../Components/CategoryFilter';s
-// import HeroSection from '../app/Components/Herosection';
+// import CategoryFilter from '../../Components/CategoryFilter';
+
+
+
+
+
 import HeroSection from './Components/hero-section';
+import DestinationsSection from './Components/destinations-section';
 
 // import PegimHero from './Components/pegim-hero';
 
@@ -24,23 +29,21 @@ const Homepage = () => {
   return (
     <>
     {/* <Navbar /> */}
-    {/* <PegimHero></PegimHero> */}
+  
     <HeroSection></HeroSection>
     
+    
 
-    {/* <HeroSearch /> */}
+    
     <div className='home-page'>
+      <DestinationsSection></DestinationsSection>
       <CityCards />
       
-      {/* <LuxuryHighlights /> */}
+     
       <HomesSection />
       <CollectionSection />
     </div>
 
-    {/* Optional Gallery Section */}
-     {/* <div style={{ height: '600px', position: 'relative' }}>
-      <CircularGallery bend={2} textColor="gray" borderRadius={0.05} />
-    </div>  */}
     
     <Footer />
 </>

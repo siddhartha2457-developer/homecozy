@@ -42,7 +42,7 @@ const HomesSection = () => {
         setLoading(true);
         setError(null);
 
-        const response = await fetch("https://host.cozyhomestays.com/api/scearch");
+        const response = await fetch("https://sampledemo.shop/api/scearch");
         const data = await response.json();
 
         if (!data || !data.success || !Array.isArray(data.data)) {
@@ -58,7 +58,7 @@ const HomesSection = () => {
             if (mainImageObj) {
               mainImage = mainImageObj.path.replace(/\\/g, "/");
               if (!mainImage.startsWith("http")) {
-                mainImage = `https://host.cozyhomestays.com/${mainImage}`;
+                mainImage = `https://sampledemo.shop/${mainImage}`;
               }
             }
           }

@@ -219,7 +219,7 @@ function BookingWidget({
   
       try {
         // Send the POST request
-        const response = await fetch("https://host.cozyhomestays.com/api/booking", {
+        const response = await fetch("https://sampledemo.shop/api/booking", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -583,13 +583,13 @@ function BookingWidget({
                   </div>
                 </div> */}
 
-                <div className="guest-option">
+                {/* <div className="guest-option">
   <div className="guest-type">
     <div className="guest-label">Extra Beds</div>
     <div className="guest-sublabel">Maximum 10 beds</div>
   </div>
   <div className="guest-controls">
-    {/* Decrement Bed Count */}
+   
     <button
       className={`guest-button ${bedCount <= 1 ? 'disabled' : ''}`}
       onClick={(e) => {
@@ -598,7 +598,7 @@ function BookingWidget({
           setBedCount((prevBedCount) => {
             const newBedCount = prevBedCount - 1;
             console.log("Updated bed count:", newBedCount);
-            calculateTotalPrice(guestCount, newBedCount); // Pass updated bed count
+            calculateTotalPrice(guestCount, newBedCount);
             return newBedCount;
           });
         }
@@ -607,10 +607,10 @@ function BookingWidget({
       -
     </button>
 
-    {/* Display Current Bed Count */}
+    
     <span className="guest-count">{bedCount}</span>
 
-    {/* Increment Bed Count */}
+   
     <button
       className={`guest-button ${bedCount >= 10 ? 'disabled' : ''}`}
       onClick={(e) => {
@@ -619,7 +619,7 @@ function BookingWidget({
           setBedCount((prevBedCount) => {
             const newBedCount = prevBedCount + 1;
             console.log("Updated bed count:", newBedCount);
-            calculateTotalPrice(guestCount, newBedCount); // Pass updated bed count
+            calculateTotalPrice(guestCount, newBedCount); 
             return newBedCount;
           });
         }
@@ -628,7 +628,7 @@ function BookingWidget({
       +
     </button>
   </div>
-</div>
+</div> */}
 
                 {/* <div className="guest-info">
                   <Users className="guest-info-icon" />

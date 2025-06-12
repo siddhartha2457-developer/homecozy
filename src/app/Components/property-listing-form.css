@@ -1,0 +1,520 @@
+/* Property Listing Form Styles */
+.listing-form-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 2rem 0;
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+}
+
+/* Background Styles */
+.listing-form-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  z-index: -1;
+}
+
+.listing-form-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(7, 25, 47, 0.05) 0%, transparent 70%);
+  z-index: 1;
+}
+
+/* Animated Villas */
+.animated-villas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.villa {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.1;
+  transition: all 1s ease;
+}
+
+.villa-1 {
+  width: 120px;
+  height: 80px;
+  background-image: url("/images/villa-1.png");
+  top: 10%;
+  left: 5%;
+  animation: floatVilla 15s infinite ease-in-out;
+}
+
+.villa-2 {
+  width: 100px;
+  height: 70px;
+  background-image: url("/images/villa-2.png");
+  top: 20%;
+  right: 10%;
+  animation: floatVilla 18s infinite ease-in-out 2s;
+}
+
+.villa-3 {
+  width: 140px;
+  height: 90px;
+  background-image: url("/images/villa-3.png");
+  bottom: 15%;
+  left: 8%;
+  animation: floatVilla 20s infinite ease-in-out 1s;
+}
+
+.villa-4 {
+  width: 110px;
+  height: 75px;
+  background-image: url("/images/villa-4.png");
+  bottom: 25%;
+  right: 15%;
+  animation: floatVilla 16s infinite ease-in-out 3s;
+}
+
+.villa-5 {
+  width: 130px;
+  height: 85px;
+  background-image: url("/images/villa-5.png");
+  top: 50%;
+  left: 2%;
+  animation: floatVilla 22s infinite ease-in-out 4s;
+}
+
+/* Success state villas */
+.villa-success-1,
+.villa-success-2,
+.villa-success-3 {
+  opacity: 0.3;
+  animation: celebrateVilla 3s infinite ease-in-out;
+}
+
+.villa-success-1 {
+  width: 150px;
+  height: 100px;
+  background-image: url("/images/villa-1.png");
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.villa-success-2 {
+  width: 130px;
+  height: 90px;
+  background-image: url("/images/villa-2.png");
+  top: 30%;
+  right: 15%;
+  animation-delay: 1s;
+}
+
+.villa-success-3 {
+  width: 140px;
+  height: 95px;
+  background-image: url("/images/villa-3.png");
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 2s;
+}
+
+/* Floating Elements */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.floating-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: rgba(7, 25, 47, 0.3);
+  border-radius: 50%;
+  animation: floatDot 10s infinite linear;
+}
+
+/* Form Container */
+.listing-form-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  z-index: 10;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.form-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #07192f, #0a2142);
+  border-radius: 50%;
+  color: white;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 25px rgba(7, 25, 47, 0.3);
+}
+
+.form-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Form Styles */
+.listing-form {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-group label svg {
+  color: #07192f;
+}
+
+.price-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: #07192f;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.8rem 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #07192f;
+  box-shadow: 0 0 0 3px rgba(7, 25, 47, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #07192f, #0a2142);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(7, 25, 47, 0.3);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.form-note {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Success Container */
+.success-container {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
+  z-index: 10;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #28a745, #34ce57);
+  border-radius: 50%;
+  color: white;
+  margin-bottom: 2rem;
+  animation: bounceIn 1s ease-out;
+}
+
+.success-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.success-container p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.success-animation {
+  display: flex;
+  justify-content: center;
+}
+
+.checkmark {
+  font-size: 3rem;
+  color: #28a745;
+  animation: checkmarkPulse 2s infinite;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatVilla {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(0.5deg);
+  }
+}
+
+@keyframes celebrateVilla {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+@keyframes floatDot {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(30px);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmarkPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .listing-form-container {
+    padding: 1rem;
+  }
+
+  .form-header h1 {
+    font-size: 2rem;
+  }
+
+  .form-header p {
+    font-size: 1rem;
+  }
+
+  .listing-form {
+    padding: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .form-group-full {
+    grid-column: 1;
+  }
+
+  .villa-1,
+  .villa-2,
+  .villa-3,
+  .villa-4,
+  .villa-5 {
+    display: none;
+  }
+
+  .success-container {
+    margin: 2rem 1rem;
+    padding: 2rem 1rem;
+  }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .success-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .form-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .listing-form {
+    padding: 1rem;
+  }
+}

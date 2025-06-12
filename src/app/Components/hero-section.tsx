@@ -8,8 +8,10 @@ import { Calendar, MapPin, Users, Menu, X, Search, ChevronLeft, ChevronRight } f
 import axios from "axios"
 import "./hero-section.css"
 import CalendarDropdown from "./CalendarDropdown";
-import "./CalendarDropdown";
-import CalendarPicker from "./list/CalendarPicker";
+
+// import "./CalendarDropdown";
+
+import { format } from "date-fns";
 
 export default function HeroSection() {
   const router = useRouter()
@@ -41,7 +43,7 @@ export default function HeroSection() {
     const [checkOutDate, setCheckOutDate] = useState<string | null>(null)
   // const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
-  // Refs for dropdowns
+  // Refs
   const locationDropdownRef = useRef<HTMLDivElement | null>(null)
   const guestDropdownRef = useRef<HTMLDivElement | null>(null)
   const dateDropdownRef = useRef<HTMLDivElement | null>(null)
@@ -78,7 +80,7 @@ export default function HeroSection() {
     }, 3500)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [properties.length])
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -225,17 +227,11 @@ export default function HeroSection() {
   const formatDate = (dateString: string | null) => {
     if (!dateString) return ""
     const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+    return format(date, "MMM dd, yyyy"); // Consistent formatting
   }
 
    // Update searchParams when dates change
-   useEffect(() => {
-    setSearchParams((prev) => ({
-      ...prev,
-      checkIn: checkInDate || "",
-      checkOut: checkOutDate || "",
-    }))
-  }, [checkInDate, checkOutDate])
+
 
   return (
     <section className="hero-container-hero-no1">
@@ -338,30 +334,79 @@ export default function HeroSection() {
                 }}
               >
                 <div className="search-field-icon-hero-no1">
-                  <Calendar size={18} />
-                </div>
-                <div className="search-field-content-hero-no1">
-                  <label htmlFor="dates">Dates</label>
-                  <div className="date-display-hero-no1">
-                    <span>{checkInDate ? formatDate(checkInDate) : "Check in"}</span>
-                    <span className="date-separator-hero-no1">→</span>
-                    <span>{checkOutDate ? formatDate(checkOutDate) : "Check out"}</span>
-                  </div>
-                </div>
+                <Calendar size={18} />
+          </div>
 
-                {(activeField === "checkIn" || activeField === "checkOut") && (
-                  <div className="search-dropdown-hero-no1 date-dropdown-hero-no1" ref={dateDropdownRef}>
-                     <CalendarDropdown
-                      checkInDate={checkInDate}
-                      checkOutDate={checkOutDate}
-                      setCheckInDate={setCheckInDate}
-                      setCheckOutDate={setCheckOutDate}
-                      selectingCheckIn={selectingCheckIn}
-                      setSelectingCheckIn={setSelectingCheckIn}
-                      onClose={() => setActiveField(null)}
-                    />
-                  </div>
-                )}
+
+
+
+
+          <div
+  className="hero-calendar-wrapper"
+  onClick={(e) => {
+    e.stopPropagation();
+  }}
+>         
+          <div className="search-field-content-hero-no1"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}>
+            <label htmlFor="dates">Dates</label>
+            <div className="date-display-hero-no1"
+           >
+            <span
+  onClick={(e) => {
+    e.stopPropagation();
+    console.log("Clicked on Check in");
+    setSelectingCheckIn(true);
+    setActiveField("checkIn");
+  }}
+>
+  {checkInDate ? formatDate(checkInDate) : "Check in"}
+</span>
+  
+  <span className="date-separator-hero-no1">→</span>
+  <span
+  onClick={(e) => {
+    e.stopPropagation(); // ⛔ stop bubbling to parent div
+    console.log("Clicked on Check out");
+    setSelectingCheckIn(false);
+    setActiveField("checkOut");
+  }}
+>
+  {checkOutDate ? formatDate(checkOutDate) : "Check out"}
+</span>
+</div>
+
+{(activeField === "checkIn" || activeField === "checkOut") && (
+  <div className="search-dropdown-hero-no1 date-dropdown-hero-no1" ref={dateDropdownRef}>
+    
+    <CalendarDropdown
+      checkInDate={checkInDate}
+      checkOutDate={checkOutDate}
+      setCheckInDate={(date) => {
+        console.log("Setting Check-In Date:", date);
+        setCheckInDate(date);
+      }}
+      setCheckOutDate={(date) => {
+        console.log("Setting Check-Out Date:", date);
+        setCheckOutDate(date);
+      }}
+      selectingCheckIn={selectingCheckIn}
+      setSelectingCheckIn={(value) => {
+        console.log("Setting Selecting Check-In:", value);
+        setSelectingCheckIn(value);
+      }}
+      onClose={() => {
+        console.log("Closing dropdown");
+        setActiveField(null);
+      }}
+    />
+  </div>
+)}
+          </div>
+          </div>
+
               </div>
 
               <div
@@ -452,7 +497,7 @@ export default function HeroSection() {
                         </div>
                       </div>
 
-                      <div className="pets-option-hero-no1">
+                      {/* <div className="pets-option-hero-no1">
                         <div className="pets-label-hero-no1">
                           <div>Travelling with pets?</div>
                           <div className="pets-sublabel-hero-no1">Pet-friendly accommodations only</div>
@@ -461,7 +506,7 @@ export default function HeroSection() {
                           <input type="checkbox" checked={withPets} onChange={() => setWithPets(!withPets)} />
                           <span className="toggle-slider-hero-no1"></span>
                         </label>
-                      </div>
+                      </div> */}
                      {/* Done Button */}
                             <div className="guest-dropdown-footer">
                             <button
@@ -492,19 +537,19 @@ export default function HeroSection() {
       <nav className="hero-nav-hero-no1">
         <div className="logo-hero-no1">CozyHomeStays</div>
 
-        {/* <button className="menu-toggle-hero-no1" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button className="menu-toggle-hero-no1" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         <div className={`nav-links-hero-no1 ${isMenuOpen ? "nav-open" : ""}`}>
-          <Link href="/list-property">List your property</Link>
-          <Link href="/register" className="btn-register-hero-no1">
-            Register
+          {/* <Link href="/list-property">List your property</Link> */}
+          <Link href="/listproperty" className="btn-register-hero-no1">
+            List your property
           </Link>
-          <Link href="/signin" className="btn-signin-hero-no1">
+          {/* <Link href="/signin" className="btn-signin-hero-no1">
             Sign in
-          </Link>
-        </div> */}
+          </Link> */}
+        </div>
       </nav>
     </section>
   )

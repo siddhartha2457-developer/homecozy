@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import React from "react"
 import "./Listingpage.css"
+import { useParams } from "next/navigation";
+import dynamic from "next/dynamic"
 
 import Header from '../../Components/list/Header';
 import PhotoGallery from '../../Components/list/PhotoGallery';
@@ -10,17 +12,18 @@ import PropertyDetails from '../../Components/list/PropertyDetails';
 import GuestFavorite from '../../Components/list/GuestFavorite';
 import Amenities from '../../Components/list/Amenities';
 import BookingWidget from '../../Components/list/BookingWidget';
-import ImageModal from '../../Components/list/ImageModal';
+// import ImageModal from '../../Components/list/ImageModal';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import MapLoader from "../../Components/list/MapLoader";
 import PropertyLocationMap from "../../Components/list/PropertyLocationMap";
 import loading from '../../animation/loading-anime.json';
 import Lottie from "react-lottie";
-import AboutSection from "../../Components/list/AboutSection";
 
-export default function ListingPage({ params }) {
-  const { id: listingId } = React.use(params)
+
+export default function ListingPage() {
+  const params = useParams();
+  const listingId = params?.id;
   const [listing, setListing] = useState(null)
   const [mainImage, setMainImage] = useState("")
   const [saved, setSaved] = useState(false)
@@ -42,6 +45,10 @@ export default function ListingPage({ params }) {
   const [bedCount, setBedCount] = useState(1);
   const [formStep, setFormStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const ImageModal = dynamic(() => import("../../Components/list/ImageModal"), {
+  ssr: false,
+})
 
   const amenitiesMap = {
     "682df81fa7e54c68fec49ac1": "wifi",
@@ -93,7 +100,7 @@ export default function ListingPage({ params }) {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const res = await fetch(`https://host.cozyhomestays.com/api/scearch/${listingId}`)
+        const res = await fetch(`https://sampledemo.shop/api/scearch/${listingId}`)
         const data = await res.json()
         const fullPropertyDetails = data.data?.fullproperty[0]
 
@@ -102,7 +109,7 @@ export default function ListingPage({ params }) {
         if (fullPropertyDetails && fullPropertyDetails.mediaInput) {
           const mainImageObj = fullPropertyDetails.mediaInput.find((img) => img.isMain)
           if (mainImageObj) {
-            mainImageUrl = `https://host.cozyhomestays.com/uploads/fullproperty/${mainImageObj.filename}`
+            mainImageUrl = `https://sampledemo.shop/uploads/fullproperty/${mainImageObj.filename}`
           }
         }
 
@@ -205,7 +212,7 @@ export default function ListingPage({ params }) {
   
       try {
         // Send the POST request
-        const response = await fetch("https://host.cozyhomestays.com/api/booking", {
+        const response = await fetch("https://sampledemo.shop/api/booking", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -282,7 +289,7 @@ export default function ListingPage({ params }) {
                     console.log("Mapping media item:", img); // Debugging step
                     return {
                       ...img,
-                      url: `https://host.cozyhomestays.com/${img.path.replace(/\\/g, "/")}`,
+                      url: `https://sampledemo.shop/${img.path.replace(/\\/g, "/")}`,
                       mimetype: img.mimetype, // Ensure mimetype is passed
                     };
                   }) || []
@@ -304,7 +311,7 @@ export default function ListingPage({ params }) {
                 rating={listing.PropertyFullPrice[0]?.rating || 0}
                 reviews={listing.PropertyFullPrice[0]?.reviews || 0}
               />
-              {/* <AboutSection></AboutSection> */}
+             
               <Amenities amenities={listing.PropertyAminity[0]?.amenities || []} />
 
               <div className="map-section">
@@ -340,22 +347,16 @@ export default function ListingPage({ params }) {
 
         {showImageModal && (
           <ImageModal
-            images={
-              listing.fullproperty[0]?.mediaInput.map((img) => ({
-                ...img,
-                url: `https://host.cozyhomestays.com/${img.path.replace(/\\/g, "/")}`,
-              })) || []
-            }
-            selectedIndex={selectedImageIndex}
-            onClose={closeImageModal}
-            onNext={() => setSelectedImageIndex((selectedImageIndex + 1) % listing.fullproperty[0]?.mediaInput.length)}
-            onPrev={() =>
-              setSelectedImageIndex(
-                (selectedImageIndex - 1 + listing.fullproperty[0]?.mediaInput.length) %
-                  listing.fullproperty[0]?.mediaInput.length,
-              )
-            }
-          />
+  isVisible={showImageModal}
+  images={
+    listing.fullproperty[0]?.mediaInput.map((img) => ({
+      ...img,
+      url: `https://sampledemo.shop/${img.path.replace(/\\/g, "/")}`,
+    })) || []
+  }
+  initialIndex={selectedImageIndex}
+  onClose={closeImageModal}
+/>
         )}
       </div>
       <Footer />

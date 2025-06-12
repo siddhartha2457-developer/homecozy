@@ -31,7 +31,7 @@ const PropertyLocationMap = ({ propertyData }) => {
   // Add random offset to coordinates for privacy
   const addLocationOffset = (lat, lng) => {
     // Add random offset of 0.015 to 0.025 degrees (roughly 1.5-2.5km)
-    const offsetRange = 0.02
+    const offsetRange = 0.015
     const latOffset = (Math.random() - 0.5) * offsetRange
     const lngOffset = (Math.random() - 0.5) * offsetRange
 
@@ -137,11 +137,8 @@ const PropertyLocationMap = ({ propertyData }) => {
             <h4>${location.name}</h4>
           </div>
           <div class="popup-body">
-            <p class="address">📍 ${location.mapAddress || location.fullAddress}</p>
             <p class="city-state">${location.city}, ${location.state}</p>
-            <div class="privacy-note">
-              <small>🔒 Approximate location shown for privacy</small>
-            </div>
+            
           </div>
         </div>
       `

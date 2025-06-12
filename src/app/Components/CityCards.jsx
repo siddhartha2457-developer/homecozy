@@ -3,6 +3,7 @@
 import React from 'react';
 import './CityCards.css';
 import TiltedCard from './TiltedCard';
+import Link from 'next/link';
 
 const cities = [
   {
@@ -31,22 +32,20 @@ const cities = [
     image: '/varanasi.jpg',
   },
   {
-    name: 'Mumbai',
+    name: 'Kasol',
     country: 'India',
-    image: '/mumbai.jpg',
+    image: '/kasol.jpg',
   },
   {
-    name: 'Mumbai',
+    name: 'Rishikesh',
     country: 'India',
-    image: '/mumbai.jpg',
+    image: '/rishikesh.jpg',
   },
   {
-    name: 'Mumbai',
+    name: 'Shimla',
     country: 'India',
-    image: '/mumbai.jpg',
+    image: '/shimla.jpg',
   },
-  
-
 ];
 
 const CityCards = () => {
@@ -54,34 +53,13 @@ const CityCards = () => {
     <>
       <h2 className="citycard-heading">Destinations</h2>
       <section className="city-cards-container">
-        {/* <div className="top-row">
-          {cities.slice(0, 2).map((city, index) => (
-            <div key={index} className="city-card large">
-              <TiltedCard
-                imageSrc={city.image}
-                altText={`${city.name}, ${city.country}`}
-                containerHeight="100%"
-                containerWidth="100%"
-                imageHeight="500px"
-                imageWidth="100%"
-                rotateAmplitude={12}
-                scaleOnHover={1.2}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-                overlayContent={
-                  <p className="tilted-card-demo-text">
-                    {city.name}, {city.country}
-                  </p>
-                }
-              />
-            </div>
-          ))}
-        </div> */}
-
         <div className="bottom-row">
-          {cities.slice(0,8).map((city, index) => (
-            <div key={index} className="city-card">
+          {cities.slice(0, 8).map((city, index) => (
+            <Link
+              key={index}
+              href={`/detail?q=${encodeURIComponent(city.name)}`}
+              className="city-card"
+            >
               <TiltedCard
                 imageSrc={city.image}
                 altText={`${city.name}, ${city.country}`}
@@ -100,7 +78,7 @@ const CityCards = () => {
                   </p>
                 }
               />
-            </div>
+            </Link>
           ))}
         </div>
       </section>

@@ -23,7 +23,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/mountainbg.png");
+  background-image: url("/mountainbg.webp");
   background-size: cover;
   background-position: center;
   animation: zoomBackground-hero-no1 30s infinite alternate ease-in-out;
@@ -161,7 +161,7 @@
   z-index: 2;
   /* margin-top: 7%; */
   min-height: 100vh;
-  margin-bottom: 7%;
+  margin-bottom: 9%;
 }
 
 .hero-text-container-hero-no1 {

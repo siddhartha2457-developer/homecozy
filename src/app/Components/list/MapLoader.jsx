@@ -8,8 +8,7 @@ const MapLoader = ({ children }) => {
   useEffect(() => {
     setIsClient(true)
 
-    // Load Leaflet CSS
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
       const link = document.createElement("link")
       link.rel = "stylesheet"
       link.href = "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"

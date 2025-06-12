@@ -26,6 +26,7 @@ function PhotoGallery({ media = [], onMediaClick }) {
           src={item.url || "/placeholder.svg?height=300&width=400"}
           alt={`Property photo ${index + 1}`}
           className="media-image"
+          loading="lazy"
         />
       </div>
     ))}

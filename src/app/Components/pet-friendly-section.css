@@ -1,0 +1,164 @@
+.pet-friendly-section {
+  padding: 3rem 1.5rem;
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+.pet-friendly-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.pet-friendly-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pet-friendly-icon {
+  color: #ff6b6b;
+}
+
+.pet-friendly-title h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.pet-friendly-navigation {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pet-friendly-nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pet-friendly-nav-button:hover:not(.disabled) {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+}
+
+.pet-friendly-nav-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pet-friendly-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 0 -0.5rem;
+}
+
+.pet-friendly-carousel-container {
+  overflow: hidden;
+}
+
+.pet-friendly-card-container {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.pet-friendly-card-link {
+  flex: 0 0 calc(100% / var(--visible-count, 4));
+  padding: 0 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pet-friendly-error {
+  background-color: #fff3f3;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.pet-friendly-retry-button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pet-friendly-retry-button:hover {
+  background-color: #ff5252;
+}
+
+.pet-friendly-no-results {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.pet-friendly-suggestion {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .pet-friendly-card-link {
+    flex: 0 0 calc(100% / 3);
+  }
+  :root {
+    --visible-count: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .pet-friendly-section {
+    padding: 2rem 1rem;
+  }
+
+  .pet-friendly-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .pet-friendly-card-link {
+    flex: 0 0 calc(100% / 2);
+  }
+  :root {
+    --visible-count: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-friendly-section {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .pet-friendly-title h2 {
+    font-size: 1.25rem;
+  }
+
+  .pet-friendly-card-link {
+    flex: 0 0 100%;
+  }
+  :root {
+    --visible-count: 1;
+  }
+}

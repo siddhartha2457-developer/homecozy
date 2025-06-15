@@ -173,6 +173,23 @@
   background: white;
 }
 
+.petFriendlyBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+  backdrop-filter: blur(4px);
+}
+
 .cardInfo {
   padding: 20px;
 }

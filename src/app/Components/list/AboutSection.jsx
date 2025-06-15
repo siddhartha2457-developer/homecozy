@@ -3,11 +3,19 @@
 import { useState } from "react"
 import "./AboutSection.css"
 
-const AboutSection = ({ propertyData }) => {
+const SHOW_MORE_THRESHOLD = 400; // You can adjust this value
+
+const AboutSection = ({ aboutText, propertyData }) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   // Generate simple content based on property data
   const getAboutContent = () => {
+    if (aboutText) {
+      return {
+        preview: aboutText,
+        full: aboutText,
+      }
+    }
     const propertyName = propertyData?.PropertyAddress?.[0]?.propertyName || "This property"
     const location = propertyData?.PropertyAddress?.[0]?.city || "this beautiful location"
     const propertyType = propertyData?.PropertyCategory?.[0]?.title?.toLowerCase() || "accommodation"
@@ -43,6 +51,9 @@ We're committed to providing excellent hospitality and ensuring your stay exceed
   const content = getAboutContent()
   const displayText = isExpanded ? content.full : content.preview
 
+  // Only show "Show more" if the text is long
+  const shouldShowMore = content.full.length > SHOW_MORE_THRESHOLD
+
   return (
     <div className="about-section-simple">
       <h2 className="about-heading-simple">About this place</h2>
@@ -55,9 +66,11 @@ We're committed to providing excellent hospitality and ensuring your stay exceed
         ))}
       </div>
 
-      <button className="show-more-button-simple" onClick={() => setIsExpanded(!isExpanded)}>
-        {isExpanded ? "Show less" : "Show more"}
-      </button>
+      {shouldShowMore && (
+        <button className="show-more-button-simple" onClick={() => setIsExpanded(!isExpanded)}>
+          {isExpanded ? "Show less" : "Show more"}
+        </button>
+      )}
     </div>
   )
 }

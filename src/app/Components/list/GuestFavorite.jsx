@@ -3,11 +3,11 @@ import './GuestFavorite.css';
 import PropertyDetails from './PropertyDetails';
 import AboutSection from './AboutSection';
 
-function GuestFavorite({ rating, reviews }) {
+function GuestFavorite({ rating, reviews, aboutText, propertyData }) {
   return (
     <div className="guest-favorite">
       <div className="favorite-badge">
-          <AboutSection></AboutSection>
+        <AboutSection aboutText={aboutText} propertyData={propertyData} />
         <div className="trophy-icon">
            {/* <Trophy /> 
             <PropertyDetails

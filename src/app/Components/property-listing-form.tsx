@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useState } from "react"
 import { Home, MapPin, User, Mail, Phone, Building, Send } from "lucide-react"
-import { submitPropertyListing } from "../actions/property-listing-actions"
 import "./property-listing-form.css"
 
 export default function PropertyListingForm() {
@@ -44,12 +43,36 @@ export default function PropertyListingForm() {
     setSubmitResult(null)
 
     try {
-      // Submit the property listing
-      const result = await submitPropertyListing(formData)
-      setSubmitResult(result)
+      // Map form data to the expected API format
+      const apiData = {
+        name: formData.ownerName,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.location,
+        propertyname: formData.propertyName,
+        propertytype: formData.propertyType,
+        propertypricerange: formData.priceRange,
+        message: formData.description || "Interested in listing my property on your platform.",
+      }
 
-      if (result.success) {
+      // Send data to the external API
+      const response = await fetch("https://sampledemo.shop/api/contact/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(apiData),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        setSubmitResult({
+          success: true,
+          message: result.message || "Your property listing has been submitted successfully!",
+        })
         setIsSubmitted(true)
+
         // Reset form after showing success message
         setTimeout(() => {
           setIsSubmitted(false)
@@ -65,8 +88,14 @@ export default function PropertyListingForm() {
           })
           setSubmitResult(null)
         }, 8000)
+      } else {
+        setSubmitResult({
+          success: false,
+          message: result.error || "Failed to submit your property listing. Please try again.",
+        })
       }
     } catch (error) {
+      console.error("Error submitting property listing:", error)
       setSubmitResult({
         success: false,
         message: "An unexpected error occurred. Please try again later.",
@@ -113,13 +142,13 @@ export default function PropertyListingForm() {
     <section className="listing-form-section">
       <div className="listing-form-background">
         <div className="listing-form-overlay"></div>
-        {/* <div className="animated-villas">
+        <div className="animated-villas">
           <div className="villa villa-1"></div>
           <div className="villa villa-2"></div>
           <div className="villa villa-3"></div>
           <div className="villa villa-4"></div>
           <div className="villa villa-5"></div>
-        </div> */}
+        </div>
         <div className="floating-elements">
           {Array.from({ length: 25 }).map((_, index) => (
             <div

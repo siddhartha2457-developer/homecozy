@@ -113,7 +113,7 @@ const HomesSection = () => {
     return (
       <section className={styles.homesSection}>
         <div className={styles.header}>
-          <h2>Homes guests love</h2>
+          <h2>Cozy Picks for You</h2>
         </div>
         <LoadingSkeleton count={visibleCount} />
       </section>
@@ -124,7 +124,7 @@ const HomesSection = () => {
     return (
       <section className={styles.homesSection}>
         <div className={styles.header}>
-          <h2>Homes guests love</h2>
+          <h2>Cozy Picks for You</h2>
         </div>
         <div className={styles.errorMessage}>
           <p>{error}</p>
@@ -140,7 +140,7 @@ const HomesSection = () => {
     return (
       <section className={styles.homesSection}>
         <div className={styles.header}>
-          <h2>Homes guests love</h2>
+          <h2>Cozy Picks for You</h2>
         </div>
         <div className={styles.noResults}>
           <p>No properties available at the moment.</p>
@@ -152,7 +152,7 @@ const HomesSection = () => {
   return (
     <section className={styles.homesSection}>
       <div className={styles.header}>
-        <h2>Homes guests love</h2>
+        <h2>Cozy Picks for You</h2>
         <div className={styles.navigation}>
           <button
             className={`${styles.navButton} ${!canGoPrev ? styles.disabled : ""}`}

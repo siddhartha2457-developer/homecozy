@@ -310,6 +310,8 @@ export default function ListingPage() {
               <GuestFavorite
                 rating={listing.PropertyFullPrice[0]?.rating || 0}
                 reviews={listing.PropertyFullPrice[0]?.reviews || 0}
+                aboutText={listing.fullproperty[0]?.AboutProperty} // <-- Pass AboutProperty here
+                propertyData={listing}            // <-- Pass propertyData if needed
               />
              
               <Amenities amenities={listing.PropertyAminity[0]?.amenities || []} />

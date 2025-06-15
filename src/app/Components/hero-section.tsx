@@ -11,7 +11,14 @@ import CalendarDropdown from "./CalendarDropdown";
 
 // import "./CalendarDropdown";
 
-import { format } from "date-fns";
+import { parse, format } from "date-fns";
+
+const formatDate = (dateString: string | null) => {
+  console.log("formatDate called with:", dateString);
+  if (!dateString) return "";
+  const date = parse(dateString, "yyyy-MM-dd", new Date());
+  return format(date, "MMM dd, yyyy");
+};
 
 export default function HeroSection() {
   const router = useRouter()
@@ -224,12 +231,6 @@ export default function HeroSection() {
     setShowLocationSuggestions(false)
   }
 
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return ""
-    const date = new Date(dateString)
-    return format(date, "MMM dd, yyyy"); // Consistent formatting
-  }
-
    // Update searchParams when dates change
 
 
@@ -256,8 +257,6 @@ export default function HeroSection() {
 
       <div className="hero-content-hero-no1">
         <div className="hero-text-container-hero-no1">
-          <h1 className="hero-title-hero-no1">Stays with Heart</h1>
-          <p className="hero-subtitle-hero-no1">Discover your perfect getaway</p>
 
           <div className="property-carousel-hero-no1">
             {properties.map((property, index) => (
@@ -267,6 +266,8 @@ export default function HeroSection() {
               </div>
             ))}
           </div>
+            <h1 className="hero-title-hero-no1">Stays with Heart</h1>
+            <p className="hero-subtitle-hero-no1">Discover your perfect getaway</p>
 
           {/* <div className="floating-cottages-hero-no1">
             <div className="cottage-hero-no1 cottage-1-hero-no1"></div>
@@ -355,25 +356,18 @@ export default function HeroSection() {
             <div className="date-display-hero-no1"
            >
             <span
-  onClick={(e) => {
-    e.stopPropagation();
-    console.log("Clicked on Check in");
-    setSelectingCheckIn(true);
-    setActiveField("checkIn");
-  }}
->
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectingCheckIn(true);
+                setActiveField("checkIn");
+              }}
+            >
+ 
   {checkInDate ? formatDate(checkInDate) : "Check in"}
 </span>
+<span className="date-separator-hero-no1">→</span>
+<span>
   
-  <span className="date-separator-hero-no1">→</span>
-  <span
-  onClick={(e) => {
-    e.stopPropagation(); // ⛔ stop bubbling to parent div
-    console.log("Clicked on Check out");
-    setSelectingCheckIn(false);
-    setActiveField("checkOut");
-  }}
->
   {checkOutDate ? formatDate(checkOutDate) : "Check out"}
 </span>
 </div>
@@ -386,11 +380,25 @@ export default function HeroSection() {
       checkOutDate={checkOutDate}
       setCheckInDate={(date) => {
         console.log("Setting Check-In Date:", date);
-        setCheckInDate(date);
+        setCheckInDate(
+          (() => {
+            if (!date) return null; // or "" if you prefer
+            const d = new Date(date);
+            d.setDate(d.getDate() + 1);
+            return d.toISOString().slice(0, 10);
+          })()
+        );
       }}
       setCheckOutDate={(date) => {
         console.log("Setting Check-Out Date:", date);
-        setCheckOutDate(date);
+        setCheckOutDate(
+          (() => {
+            if (!date) return null;
+            const d = new Date(date);
+            d.setDate(d.getDate() + 1);
+            return d.toISOString().slice(0, 10);
+          })()
+        );
       }}
       selectingCheckIn={selectingCheckIn}
       setSelectingCheckIn={(value) => {
@@ -553,4 +561,12 @@ export default function HeroSection() {
       </nav>
     </section>
   )
+}
+
+// Helper
+function toLocalYMD(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }

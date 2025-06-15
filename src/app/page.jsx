@@ -12,6 +12,7 @@ import Footer from '../app/Components/Footer';
 
 // import LuxuryHighlights from './Components/LuxuryHighlights';
 import CollectionSection from '../app/Components/CollectionSection';
+import PetFriendlySection from './Components/pet-friendly-section';
 
 // import FullScreenLoader from '../../Components/FullScreenLoader';
 // import CategoryFilter from '../../Components/CategoryFilter'
@@ -41,6 +42,7 @@ const Homepage = () => {
       
      
       <HomesSection />
+      <PetFriendlySection></PetFriendlySection>
       <CollectionSection />
     </div>
 

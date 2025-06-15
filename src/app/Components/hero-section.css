@@ -171,11 +171,12 @@
 }
 
 .hero-title-hero-no1 {
-  font-size: 3.5rem;
+  font-size: 2rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
   animation: fadeInUp-hero-no1 1s ease-out;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 2rem;
 }
 
 .hero-subtitle-hero-no1 {
@@ -198,6 +199,7 @@
   top: 0;
   left: 0;
   opacity: 0;
+  width: 600px;
   transform: translateY(20px);
   transition: opacity 0.35s ease, transform 0.35s ease; 
 }
@@ -208,15 +210,16 @@
 }
 
 .property-item-hero-no1 h3 {
-  font-size: 1.8rem;
+  font-size: 3.5rem;
   margin-bottom: 0.5rem;
-  color: #f2ad1f;
+  color: #ff8d00;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .property-item-hero-no1 p {
-  font-size: 1rem;
-  opacity: 0.8;
+  font-size: 1.3rem;
+  opacity: 1;
+  margin-bottom: 1rem;
 }
 
 /* Floating Cottages Animation */
@@ -692,7 +695,7 @@
 .search-button1-hero-no1 {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #07192f 0%, #1e3a8a 100%);
+  background: #07192f;
   color: white;
   border: none;
   border-radius: 12px;
@@ -709,7 +712,7 @@
 }
 
 .search-button1-hero-no1:hover {
-  background: linear-gradient(135deg, #1e3a8a 0%, #07192f 100%);
+  background: #1e3a8a;
   /* transform: translateY(-2px); */
   box-shadow: 0 8px 25px rgba(7, 25, 47, 0.3);
 }
@@ -874,6 +877,11 @@
   .calendar-day-hero-no1 {
     font-size: 0.8rem;
   }
+   .property-item-hero-no1 {
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -884,6 +892,7 @@
 
   .hero-title-hero-no1 {
     font-size: 2rem;
+    margin: 0;
   }
 
   .hero-subtitle-hero-no1 {
@@ -907,9 +916,14 @@
   .nav-links-hero-no1 {
     width: 90%;
   }
+  .property-item-hero-no1 {
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+  }
 
   .property-item-hero-no1 h3 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
 
   .property-item-hero-no1 p {

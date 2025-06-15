@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { parse, format } from "date-fns"
 import "./CalendarDropdown.css"
 
 const CalendarDropdown = ({
@@ -48,9 +49,10 @@ const CalendarDropdown = ({
   // Check if a date is between check-in and check-out
   const isInRange = (date) => {
     if (!date || !checkInDate || !checkOutDate) return false
-    const checkIn = new Date(checkInDate)
-    const checkOut = new Date(checkOutDate)
-    return date > checkIn && date < checkOut
+    // Only parse if checkInDate and checkOutDate are valid
+    const checkIn = checkInDate ? new Date(checkInDate) : null
+    const checkOut = checkOutDate ? new Date(checkOutDate) : null
+    return checkIn && checkOut && date > checkIn && date < checkOut
   }
 
   // Handle date selection
@@ -88,8 +90,8 @@ const CalendarDropdown = ({
   // Format date for display
   const formatDate = (dateString) => {
     if (!dateString) return ""
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    const date = parse(dateString, "yyyy-MM-dd", new Date())
+    return format(date, "MMM dd, yyyy")
   }
 
   // Get month name and year
@@ -117,7 +119,7 @@ const CalendarDropdown = ({
   return (
     <div className="calendar-dropdown">
       {/* Date Input Fields */}
-      <div className="date-inputs">
+      {/* <div className="date-inputs">
         <div
           className={`date-input-field ${selectingCheckIn ? "active" : ""}`}
           onClick={() => setSelectingCheckIn(true)}
@@ -132,7 +134,7 @@ const CalendarDropdown = ({
           <label>Check-out</label>
           <div className="date-value">{checkOutDate ? formatDate(checkOutDate) : "Add date"}</div>
         </div>
-      </div>
+      </div> */}
 
       {/* Calendar Header */}
       <div className="calendar-header">

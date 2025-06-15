@@ -9,33 +9,33 @@ const collections = [
   {
     title: 'Cottages in Kasol',
     subtitle: 'Top Collections',
-    image: '/cch.jpg',
+    image: '/cot6.webp',
     city: 'Kasol',
   },
   {
-    title: 'Cottages In Dhamsala',
+    title: 'Cottages In Auli',
     subtitle: '',
-    image: '/cct.webp',
-    city: 'Dharamshala',
+    image: '/cot2.webp',
+    city: 'Auli',
   },
   {
     title: 'Cottages In Manali',
     subtitle: '',
-    image: '/ccw.webp',
+    image: '/cot3.webp',
     city: 'Manali',
   },
   {
-    title: 'Cottages in Pilgiri',
+    title: 'Cottages in Bhimtal',
     subtitle: '',
-    image: '/cco.jpg',
-    city: 'Pilgiri',
+    image: '/cot4.webp',
+    city: 'Bhimtal',
   },
 ];
 
 const CollectionSection = () => {
   return (
     <div className="collection-section">
-      <h2 className="collection-title">Choose a Collection</h2>
+      <h2 className="collection-title">Our Favorite Cottage Escapes</h2>
       <div className="collection-grid">
         {collections.map((item, index) => (
           <Link
